@@ -1,0 +1,9 @@
+.create-section {
+  margin: 80px 0 80px 0;
+
+  &__button {
+    @include button(30px, 16px);
+  }
+}
+
+  

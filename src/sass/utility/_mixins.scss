@@ -1,0 +1,35 @@
+//Здесь живут миксины - кусочки повторяющегося кода для повторяющихся нужд.
+
+@mixin visually-hidden() {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  border: 0;
+
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+}
+
+@mixin centerer($top: null, $left: null, $transform: null) {
+  position: absolute;
+
+  top: $top;
+  left: $left;
+  transform: translate($transform);
+}
+
+@mixin button($padding, $font-size, $font-weight: 700, $text: uppercase, $background: #ffff99) {
+  padding: $padding;
+  font-size: $font-size;
+  border: none;
+  font-weight: $font-weight;
+  text-transform: $text;
+  background-color: $background;
+}

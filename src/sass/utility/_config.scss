@@ -1,0 +1,13 @@
+//Здесь собирается вся утилитарная функциональность, чтобы не импортировать по триста файлов
+
+// --- VARIABLES ---
+
+@import "./utility/variables";
+
+// --- MIXINS ---
+
+@import "./utility/mixins";
+
+// --- BASE STYLES ---
+
+@import "./utility/base";
