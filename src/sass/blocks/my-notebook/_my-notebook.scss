@@ -1,0 +1,46 @@
+.my-notebook {
+  margin-top: 30px;
+  margin-bottom: 40px;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title, &__search {
+    margin: 0;
+  }
+
+  &__search-container, &__filter {
+    margin-left: 20px;
+    margin-bottom: 0;
+  }
+
+  &__search-container {
+    position: relative;
+  }
+
+  &__search-loupe {
+    width: fit-content;
+
+    @include centerer(0, 0, (4px, 4px));
+  }
+
+  &__search-input {
+    padding-left: 17px;
+  }
+
+  &__select-list {
+    display: inherit;
+    border: none;
+  }
+
+  &__list {
+    max-width: 400px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
