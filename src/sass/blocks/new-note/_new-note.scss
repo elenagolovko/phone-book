@@ -1,0 +1,28 @@
+.new-note {
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+    max-width: 200px;
+    margin: 0 auto 30px auto;
+  }
+
+  &__label {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    padding: 10px 0 10px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 0 1px rgb(134, 132, 132);
+  }
+
+  &__button {
+    @include button(5px, 14px);
+  }
+}
+
+
+
+

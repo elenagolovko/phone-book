@@ -152,21 +152,21 @@ module.exports = (env, options) => {
         chunkFilename: '[id].css'
       }),
       new CopyWebpackPlugin([
-        {
-          from: path.resolve(__dirname, 'projects'),
-          to: 'projects'
-        },
-        {
-          from: path.resolve(__dirname, 'src/images'),
-          to: 'images'
-        }
+        // {
+        //   from: path.resolve(__dirname, 'projects'),
+        //   to: 'projects'
+        // },
+        // {
+        //   from: path.resolve(__dirname, 'src/images'),
+        //   to: 'images'
+        // }
       ])
     ],
 
     devServer: {
       host: 'localhost',
       port: 3000,
-      open: false
+      open: true
     }
   };
 };
