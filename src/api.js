@@ -164,3 +164,19 @@ let newDescription = 'Хорошее начало маршрута для про
 getUserInfo(email, password).then((user) => addInfo(user.token, container, naviaddress, name, newDescription));
 ----*/
 
+function deleteAddress(token, container, naviaddress) {
+	fetch('https://staging-api.naviaddress.com/api/v1.5/Addresses/' + container + '/' + naviaddress, {  
+	method: 'delete',  
+	headers: {  
+						"content-type": "application/json",  
+						"auth-token": token  
+					}, 
+})
+.then(response => response.json())  
+.then(data => {
+		console.log(data.message);
+	}) 
+.catch(function (error) {  
+	console.log('Request failed', error);  
+});
+}
