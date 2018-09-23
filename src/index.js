@@ -1,9 +1,11 @@
 import './sass/styles.scss';
+import { getUserInfo, email, password, getUserCreated } from './api';
 
 ('use strict');
 
 (function() {
   let form = document.querySelector('.new-note__form');
+  let adresesList = document.querySelector('.my-notebook__list');
 
   form.addEventListener('submit', evt => {
     evt.preventDefault();
@@ -15,4 +17,6 @@ import './sass/styles.scss';
     // });
     // }
   });
+
+  getUserInfo(email, password).then(user => getUserCreated(user));
 })();
