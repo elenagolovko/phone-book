@@ -6,7 +6,6 @@
     max-width: 200px;
     margin: 0 auto 30px auto;
     padding: 10px 30px;
-    border: 1px dashed #e0de48;
     border-radius: 10px;
   }
 
@@ -22,7 +21,7 @@
   }
 
   &__button {
-    @include button(5px, 14px);
+    @include button(20px, 16px);
   }
 }
 

@@ -38,9 +38,18 @@
   }
 
   &__list {
-    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  &-items__list {
+    border: 1px dashed black;
+    border-radius: 10px;
   }
 }
