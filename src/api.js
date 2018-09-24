@@ -112,6 +112,7 @@ function addInfo(token, container, naviaddress, name, description) {
 
 //Получения избранных адресов
 function getUserFavourites(user) {
+	return new Promise (function(resolve) {
 	fetch('https://staging-api.naviaddress.com/api/v1.5/Addresses/favorites?UserId=' + user.id, {  
 	method: 'get',  
 	headers: {  
@@ -121,15 +122,18 @@ function getUserFavourites(user) {
 })
 .then(response => response.json())  
 .then(data => {
-		console.log(data.result); /*пока только в консоль выводит*/
+		console.log('Избранные:' + data.result); /*пока только в консоль выводит*/
+		resolve(data.result);
 	}) 
 .catch(function (error) {  
 	console.log('Request failed', error);  
+});
 });
 }
 
 //Получение адресов, созданных юзером
 function getUserCreated(user) {
+	return new Promise (function(resolve) {
 	fetch('https://staging-api.naviaddress.com/api/v1.5/Addresses/my?UserId=' + user.id, {  
 	method: 'get',  
 	headers: {  
@@ -139,10 +143,12 @@ function getUserCreated(user) {
 })
 .then(response => response.json())  
 .then(data => {
-		console.log(data.result);
+		console.log('Созданные:' + data.result);
+		resolve(data.result);
 	}) 
 .catch(function (error) {  
 	console.log('Request failed', error);  
+});
 });
 }
 
@@ -180,3 +186,41 @@ function deleteAddress(token, container, naviaddress) {
 	console.log('Request failed', error);  
 });
 }
+
+//Все адреса(избранные + созданные)
+function getAllAddressess(user) {
+	return new Promise(function(resolve){
+		var created; 
+		var favourites;
+		getUserCreated(user)
+		.then((data) => created = data)
+		.then(() => getUserFavourites(user))
+		.then((data) => favourites = data)
+		.then(() => {
+			resolve(created.concat(favourites))
+		});
+	});
+}
+
+/*----- СОРТИРОВКА --------*/
+function sortAbc(arr) {
+	return arr.sort(function (a, b) {
+		return a.name > b.name ? 1 : -1;
+	});
+}
+
+function findType(arr, type) {
+	return type == 'event' ? 
+	arr.filter( n => 'event' == n.address_type) : arr.filter( n => 'event' !== n.address_type);
+}
+
+function findName(arr, str) {
+	return arr.filter(function (n) {
+		return str.toLowerCase() == n.name.toLowerCase().substr(0, str.length);
+	});
+}
+
+//Пример использования (в моих избранных адресах есть такой адрес):
+getUserInfo(email, password)
+.then((user) => getUserFavourites(user))
+.then((arr) => console.log(findName(arr, 'дом')));
