@@ -1,13 +1,13 @@
 // Эти данные нужно будет получать из форм
-let email = 'ekaterina.dony@yandex.ru';
-let password = '71115317';
+export const email = 'ekaterina.dony@yandex.ru';
+export const password = '71115317';
 let newLat = 55.775277;
 let newLng = 37.819246;
 let name = 'Старт';
 let description = 'Начало маршрута для пробежки 10км';
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
-function getUserInfo(email, password) {
+export function getUserInfo(email, password) {
   return new Promise(function(resolve) {
     fetch('https://staging-api.naviaddress.com/api/v1.5/sessions', {
       method: 'post',
@@ -145,7 +145,7 @@ function getUserFavourites(user) {
 }
 
 //Получение адресов, созданных юзером
-function getUserCreated(user) {
+export function getUserCreated(user) {
   fetch(
     'https://staging-api.naviaddress.com/api/v1.5/Addresses/my?UserId=' +
       user.id,

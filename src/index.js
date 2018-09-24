@@ -5,7 +5,7 @@ import { getUserInfo, email, password, getUserCreated } from './api';
 
 (function() {
   let form = document.querySelector('.new-note__form');
-  let adresesList = document.querySelector('.my-notebook__list');
+  // let adresesList = document.querySelector('.my-notebook__list');
 
   form.addEventListener('submit', evt => {
     evt.preventDefault();
@@ -17,6 +17,9 @@ import { getUserInfo, email, password, getUserCreated } from './api';
     // });
     // }
   });
+  // console.log(getUserInfo(email, password));
 
-  getUserInfo(email, password).then(user => getUserCreated(user));
+  let addreses = getUserInfo(email, password).then(user =>
+    getUserCreated(user)
+  );
 })();
