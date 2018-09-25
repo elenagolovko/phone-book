@@ -14,41 +14,60 @@ import { getUserInfo, getUserCreated } from './api';
 
   function showLoginForm(evt) {
     evt.preventDefault();
-    modalWindow.classList.toggle('visually-hidden');
+    modalWindow.classList.remove('visually-hidden');
     emailInput.focus();
   }
 
-  function validateEmail(value) {
+  //reset state
+  function resetInputState(element) {
+    if (element.classList.contains('modal__input--invalid')) {
+      element.classList.remove('modal__input--invalid');
+      element.nextElementSibling.classList.add('visually-hidden');
+    }
+  }
+
+  function setErrorState(element) {
+    element.nextElementSibling.classList.remove('visually-hidden');
+    element.classList.add('modal__input--invalid');
+  }
+
+  function validateEmail(value, element) {
     if (/@{1}/i.test(value)) {
+      resetInputState(element);
       return true;
     } else {
-      //реакция для пользователя
+      setErrorState(element);
       return false;
     }
   }
 
-  function validatePassword(value) {
+  function validatePassword(value, element) {
     if (value.length < 8 || value.lenth > 20) {
-      //реакция для пользователя
+      setErrorState(element);
       return false;
     } else {
+      resetInputState(element);
       return true;
     }
   }
 
   loginLink.addEventListener('click', showLoginForm);
   loginLink.addEventListener('keydown', evt => {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      //пока не работает
+    if (
+      evt.keyCode === ENTER_KEYCODE &&
+      modalWindow.classList.contains('visually-hidden')
+    ) {
       modalWindow.classList.remove('visually-hidden');
     }
   });
 
   window.addEventListener('keydown', function(evt) {
-    //тоже пока не работает, но с доступностью буду работать дальше
     if (evt.keyCode === ESC__KEYCODE) {
-      if (!modalWindow.classList.contains('visually-hidden')) {
-        modalWindow.classList.remove('visually-hidden');
+      if (
+        !modalWindow.classList.contains('visually-hidden') &&
+        !evt.target.classList.contains('modal__input')
+      ) {
+        modalWindow.classList.add('visually-hidden');
       }
     }
   });
@@ -61,11 +80,14 @@ import { getUserInfo, getUserCreated } from './api';
     inputs.forEach(function(element) {
       if (element.name == 'email') {
         emailValue = element.value;
-        emailValidity = validateEmail(emailValue);
+        emailValidity = validateEmail(emailValue, element);
       } else if (element.name == 'password') {
         passwordValue = element.value;
-        passwordValidity = validatePassword(passwordValue);
+        passwordValidity = validatePassword(passwordValue, element);
       }
+      element.addEventListener('input', evt => {
+        resetInputState(evt.target);
+      });
     });
 
     if (emailValidity && passwordValidity) {
@@ -75,6 +97,7 @@ import { getUserInfo, getUserCreated } from './api';
 
     let addreses = getUserInfo(email, password).then(user => {
       loginLink.textContent = email;
+      modalWindow.classList.add('visually-hidden');
       getUserCreated(user);
     });
     console.log(addreses);

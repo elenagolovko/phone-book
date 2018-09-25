@@ -42,6 +42,14 @@
   &__input:focus {
     box-shadow: 0 0 0 2px #e4e434;
   }
+
+  &__input--invalid {
+    box-shadow: 0 0 0 2px #ff6f81;
+  }
+
+  &__error-message {
+    @include error-message(-23px, 11px);
+  }
   
   &__help {
     position: absolute;
