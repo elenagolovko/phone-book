@@ -1,7 +1,7 @@
 <html lang="ru">
 
 <head>
-	<title>WebNotebook</title>
+	<title>NaviBook</title>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -13,12 +13,32 @@
 				<li class="navigation__item"><a class="navigation__link link--current" href="#">Главная</a></li>
 				<li class="navigation__item"><a class="navigation__link" href="#new-note">Новая запись</a></li>
 				<li class="navigation__item"><a class="navigation__link" href="#">Моя записная книжка</a></li>
-				<li class="navigation__item"><a class="navigation__link" href="#">Карта</a></li>
+				<li class="navigation__item">
+					<a class="navigation__link link-login" href="#">Личный кабинет</a>
+					<section class="modal modal-login visually-hidden">
+						<h2 class="visually-hidden">Форма входа</h2>
+						<form class="modal__login-form" action="#" method="post" novalidate>
+							<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
+							<input class="modal__input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
+							<label class="visually-hidden" for="login-form-password">Ваш пароль</label>
+							<input class="modal__input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
+							<button class="modal__button" type="submit">Войти</button>
+							<div class="modal__help modal-help">
+								<p class="modal-help__text">
+									<a class="modal-help__link" href="#">Забыли пароль?</a>
+								</p>
+								<p class="modal-help__text">
+									<a class="modal-help__link" href="#">Новая регистрация</a>
+								</p>
+							</div>
+						</form>
+					</section>
+				</li>
 			</ul>
 		</nav>
 	</header>
 	<main class="main__content">
-		<h2 class="main__title">Добро пожаловать в WebNotebook</h2>
+		<h2 class="main__title">Добро пожаловать в NaviBook</h2>
 		<section class="main__info">
 			<h2 class="visually-hidden">Описание</h2>
 			<p class="main__description">Приложение для сохранения важной информации о ваших друзьях, коллегах, гостях.</p>

@@ -1,6 +1,6 @@
 // Эти данные нужно будет получать из форм
-export const email = 'ekaterina.dony@yandex.ru';
-export const password = '71115317';
+// export const email = 'ekaterina.dony@yandex.ru';
+// export const password = '71115317';
 let newLat = 55.775277;
 let newLng = 37.819246;
 let name = 'Старт';
@@ -8,6 +8,7 @@ let description = 'Начало маршрута для пробежки 10км'
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
 export function getUserInfo(email, password) {
+  console.log(email, password);
   return new Promise(function(resolve) {
     fetch('https://staging-api.naviaddress.com/api/v1.5/sessions', {
       method: 'post',
