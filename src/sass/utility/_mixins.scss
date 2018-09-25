@@ -25,7 +25,13 @@
   transform: translate($transform);
 }
 
-@mixin button($padding, $font-size, $font-weight: 700, $text: uppercase, $background: #ffff99) {
+@mixin button(
+  $padding,
+  $font-size,
+  $font-weight: 700,
+  $text: uppercase,
+  $background: #ffff99
+) {
   padding: $padding;
   font-size: $font-size;
   border: none;
