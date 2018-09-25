@@ -17,16 +17,16 @@
     width: 150px;
     padding: 10px;
   }
-  
+
   &__item:not(:last-child) {
     margin-right: 10px;
   }
-  
+
   &__link {
     text-decoration: none;
     color: white;
   }
-  
+
   .link--current,
   &__link:hover,
   &__link:focus {

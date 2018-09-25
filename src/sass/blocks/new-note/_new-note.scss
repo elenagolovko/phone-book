@@ -1,5 +1,4 @@
 .new-note {
-  
   &__form {
     display: flex;
     flex-direction: column;
@@ -24,7 +23,3 @@
     @include button(20px, 16px);
   }
 }
-
-
-
-

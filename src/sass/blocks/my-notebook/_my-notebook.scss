@@ -9,11 +9,13 @@
     align-items: center;
   }
 
-  &__title, &__search {
+  &__title,
+  &__search {
     margin: 0;
   }
 
-  &__search-container, &__filter {
+  &__search-container,
+  &__filter {
     margin-left: 20px;
     margin-bottom: 0;
   }
