@@ -42,7 +42,7 @@ import { getUserInfo, getUserCreated } from './api';
   }
 
   function validatePassword(value, element) {
-    if (value.length < 8 || value.lenth > 20) {
+    if (value.length < 6 || value.lenth > 20) {
       setErrorState(element);
       return false;
     } else {
@@ -79,7 +79,7 @@ import { getUserInfo, getUserCreated } from './api';
     let inputs = evt.target.querySelectorAll('.modal__input');
     inputs.forEach(function(element) {
       if (element.name == 'email') {
-        emailValue = element.value;
+        emailValue = element.value.toLowerCase();
         emailValidity = validateEmail(emailValue, element);
       } else if (element.name == 'password') {
         passwordValue = element.value;
