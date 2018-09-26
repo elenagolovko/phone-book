@@ -52,3 +52,56 @@ function findUpcoming(arr, limit) {
 // .then((res) => res[0].concat(res[1])))
 // .then((arr) => findType(arr, 'event'))
 // .then((arr) => console.log(findName(arr, 'природа')))
+
+/* --- 
+Поиск ближайших (по месторасположению) адресов 
+----*/
+const DELTA = 0.02; //по моим рассчетам, это примерно 2км, т.е. адреса будут отбираться в зоне 2км
+
+// Получить текущее расположение
+function getLocation() {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords);
+        resolve(position.coords);
+      });
+    } else {
+      alert('Геолокация не поддерживается вашим браузером');
+      reject();
+    }
+  });
+}
+// Создать квадрат для поиска вокруг адреса
+function createRect(coords, delta) {
+  return {
+    lt_lat: coords.latitude - delta,
+    lt_lng: coords.longitude - delta,
+    rb_lat: coords.latitude + delta,
+    rb_lng: coords.longitude + delta
+  };
+}
+
+//поиск адресов в заданном квадрате
+function findNearest(arr, coords) {
+  return arr.filter(n => {
+    return (
+      n.point.lat > coords.lt_lat &&
+      n.point.lat < coords.rb_lat &&
+      n.point.lng > coords.lt_lng &&
+      n.point.lng < coords.rb_lng
+    );
+  });
+}
+
+//Обобщающая функция
+// async function getNearestAdr() {
+//   let user = await getUserInfo(email, password);
+//   let created = await getUserCreated(user);
+//   let favourites = await getUserFavourites(user);
+//   let all = created.concat(favourites);
+//   let arr = findType(all, 'free');
+//   let coords = await getLocation();
+//   let rect = createRect(coords, DELTA);
+//   console.log(findNearest(arr, rect));
+// }
