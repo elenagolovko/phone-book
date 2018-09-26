@@ -48,7 +48,8 @@
     list-style: none;
   }
 
-  &-items__list {
+  &__item {
+    padding: 15px;
     border: 1px dashed black;
     border-radius: 10px;
   }

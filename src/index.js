@@ -93,13 +93,16 @@ import { getUserInfo, getUserCreated } from './api';
     if (emailValidity && passwordValidity) {
       email = emailValue;
       password = passwordValue;
+      getUserAddress(email, password);
     }
 
-    let addreses = getUserInfo(email, password).then(user => {
-      loginLink.textContent = email;
-      modalWindow.classList.add('visually-hidden');
-      getUserCreated(user);
-    });
-    console.log(addreses);
+    function getUserAddress(email, password) {
+      getUserInfo(email, password).then(user => {
+        loginLink.textContent = email;
+        modalWindow.classList.add('visually-hidden');
+        let addreses = getUserCreated(user);
+        console.log(addreses);
+      });
+    }
   });
 })();
