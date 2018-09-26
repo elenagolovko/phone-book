@@ -7,8 +7,20 @@
 
   // @include centerer(50%, 50%, (-50%, -50%));
 
+  &__header {
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+  }
+
   &__navigation {
-    background-color: black;
+    background-color: $main-header-color;
+  }
+
+  &__content {
+    // временный дизайн
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   &__description,
@@ -23,7 +35,7 @@
   }
 
   &__footer {
-    background-color: black;
+    background-color: $main-footer-color;
     color: white;
     padding: 10px;
 
