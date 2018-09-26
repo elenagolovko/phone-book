@@ -7,3 +7,12 @@ $colors-c: (
   selected-hovered: #e62e7a,
   disabled: #b3b3b3
 );
+
+$min-width: 320px;
+$mid-width: 768px;
+$max-width: 1170px;
+$header-min-height: 38px;
+$main-header-color: black;
+$selected-header-color: #ffff99;
+$hovered-header-color: $selected-header-color;
+$main-footer-color: $main-header-color;

@@ -1,8 +1,13 @@
 .navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   width: 100%;
+  min-height: $header-min-height;
 
   &__list {
-    display: flex;
+    width: 100%;
+    display: none;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -10,6 +15,27 @@
     margin: 0;
     padding: 0;
     list-style: none;
+
+    &-mobile {
+      position: absolute;
+      top: $header-min-height;
+      right: 0;
+      left: 0;
+      // height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      background-color: $main-header-color;
+      z-index: 20;
+    }
+
+    @media only screen and (min-width: $mid-width) {
+      & {
+        display: flex;
+      }
+    }
   }
 
   &__item {
@@ -30,6 +56,63 @@
   .link--current,
   &__link:hover,
   &__link:focus {
-    color: #ffff99;
+    color: $hovered-header-color;
+  }
+
+  &__btn {
+    align-self: flex-start;
+    position: relative;
+    display: block;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background-color: white;
+    border: 1px solid $main-header-color;
+    z-index: 21;
+
+    @media only screen and (min-width: $mid-width) {
+      & {
+        display: none;
+      }
+    }
+  }
+
+  &__btn-line {
+    position: absolute;
+    left: 6px;
+    width: 18px;
+    height: 2px;
+    background-color: $main-header-color;
+    transition: 0.3s;
+    transform: rotate(0deg);
+  }
+
+  &__btn-line:nth-child(1) {
+    top: 6px;
+  }
+
+  &__btn-line:nth-child(2) {
+    top: 14px;
+  }
+
+  &__btn-line:nth-child(3) {
+    top: 14px;
+  }
+
+  &__btn-line:nth-child(4) {
+    top: 22px;
+  }
+
+  &__btn-close &__btn-line:nth-child(1),
+  &__btn-close &__btn-line:nth-child(4) {
+    width: 0;
+  }
+
+  &__btn-close &__btn-line:nth-child(2) {
+    transform: rotate(45deg);
+  }
+
+  &__btn-close &__btn-line:nth-child(3) {
+    transform: rotate(-45deg);
   }
 }

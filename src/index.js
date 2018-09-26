@@ -1,5 +1,6 @@
 import './sass/styles.scss';
 import { getUserInfo, getUserCreated } from './api';
+import AdaptiveMenu from './menu';
 
 ('use strict');
 
@@ -105,4 +106,7 @@ import { getUserInfo, getUserCreated } from './api';
       });
     }
   });
+
+  //адаптивное меню
+  AdaptiveMenu();
 })();
