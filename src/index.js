@@ -93,6 +93,10 @@ import AdaptiveMenu from './menu';
       }
       element.addEventListener('input', evt => {
         resetInputState(evt.target);
+        const errLogin = document.getElementById('js-errLogin');
+        if (!errLogin.classList.contains('visually-hidden')) {
+          errLogin.classList.add('visually-hidden');
+        }
       });
     });
 
