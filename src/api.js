@@ -178,7 +178,8 @@ export function getUserCreated(user) {
     )
       .then(response => response.json())
       .then(data => {
-        console.log('Созданные:', data.result);
+        window.addressesData = data.result;
+        // console.log('Созданные:', data.result);
         resolve(data.result);
       })
       .catch(function(error) {

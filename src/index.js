@@ -1,6 +1,7 @@
 import './sass/styles.scss';
 import { getUserInfo, getUserCreated } from './api';
 import AdaptiveMenu from './menu';
+import createList from './show-adr';
 
 ('use strict');
 
@@ -111,12 +112,15 @@ import AdaptiveMenu from './menu';
     }
 
     function getUserAddress(email, password) {
-      getUserInfo(email, password).then(user => {
-        loginLink.textContent = email;
-        modalWindow.classList.add('visually-hidden');
-        let addreses = getUserCreated(user);
-        console.log(addreses);
-      });
+      getUserInfo(email, password)
+        .then(user => getUserCreated(user))
+        .then(arr => createList(arr))
+        .then(user => {
+          loginLink.textContent = 'Выход';
+          modalWindow.classList.add('visually-hidden');
+          // let addreses = getUserCreated(user);
+          // createList(addreses);
+        });
     }
   });
 

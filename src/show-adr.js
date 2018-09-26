@@ -1,7 +1,13 @@
-function createList(arr) {
+export default function createList(arr) {
+  let descriptionDefault = document.querySelector(
+    '.my-notebook__desc--default'
+  );
+  descriptionDefault.setAttribute('style', 'display: none');
   const container = document.getElementById('list'); //контейнер для списка
-  for (let i of arr) {
-    let address = document.createElement('li'); //контейнер для адреса
+  arr.forEach(function(i) {
+    console.log(i);
+    let address = document.createElement('li');
+    address.setAttribute('class', 'my-notebook__address'); //контейнер для адреса
     container.appendChild(address);
     let name = document.createElement('h3'); //название
     name.innerHTML = i.name;
@@ -50,5 +56,5 @@ function createList(arr) {
         i.event_end.substr(11, 5);
       address.appendChild(end);
     }
-  }
+  });
 }
