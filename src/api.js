@@ -30,8 +30,19 @@ export function getUserInfo(email, password) {
         console.log(user);
         resolve(user);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log('Request failed', error);
+
+        document
+          .getElementById('js-errLogin')
+          .classList.remove('visually-hidden');
+
+        let inputs = document.querySelectorAll('.modal__input');
+        inputs.forEach(element => {
+          if (!element.classList.contains('modal__input--invalid')) {
+            element.classList.add('modal__input--invalid');
+          }
+        });
       });
   });
 }

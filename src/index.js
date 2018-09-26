@@ -11,11 +11,16 @@ import AdaptiveMenu from './menu';
   let modalWindow = document.querySelector('.modal-login');
   let loginForm = document.querySelector('.modal__login-form');
   let emailInput = loginForm.querySelector('#login-form-email');
-  let email, password;
+  let email;
 
   function showLoginForm(evt) {
     evt.preventDefault();
     modalWindow.classList.remove('visually-hidden');
+
+    const errLogin = document.getElementById('js-errLogin');
+    if (!errLogin.classList.contains('visually-hidden')) {
+      errLogin.classList.add('visually-hidden');
+    }
     emailInput.focus();
   }
 
@@ -43,7 +48,7 @@ import AdaptiveMenu from './menu';
   }
 
   function validatePassword(value, element) {
-    if (value.length < 6 || value.lenth > 20) {
+    if (value.length < 6 || value.length > 20) {
       setErrorState(element);
       return false;
     } else {
@@ -88,13 +93,21 @@ import AdaptiveMenu from './menu';
       }
       element.addEventListener('input', evt => {
         resetInputState(evt.target);
+        const errLogin = document.getElementById('js-errLogin');
+        if (!errLogin.classList.contains('visually-hidden')) {
+          errLogin.classList.add('visually-hidden');
+        }
       });
     });
 
     if (emailValidity && passwordValidity) {
       email = emailValue;
-      password = passwordValue;
-      getUserAddress(email, password);
+      let inputs = evt.target.querySelectorAll('.modal__input');
+      inputs.forEach(element => {
+        element.value = '';
+      });
+
+      getUserAddress(email, passwordValue);
     }
 
     function getUserAddress(email, password) {
