@@ -75,9 +75,8 @@ import { createList, loadLists, clearListContainer } from './show-adr';
       loginLink.classList.remove('js-authorized');
 
       loginLink.textContent = 'Личный кабинет';
-      const addressList = document.getElementById('list');
-      addressList.innerHTML =
-        'Чтобы увидеть свои адреса необходимо зарегистрироваться!';
+      const addressList = document.getElementById('list-container');
+      addressList.innerHTML = '';
     } else {
       showLoginForm(event);
     }
