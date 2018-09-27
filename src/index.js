@@ -1,8 +1,17 @@
 import './sass/styles.scss';
-import { getUserInfo, getUserCreated } from './api';
-import { sortByDate, findUpcoming, findNearest, sortAbc } from './sort';
+import { getUserInfo, getUserCreated, getUserFavourites } from './api';
+import {
+  sortByDate,
+  sortAbc,
+  getLocation,
+  createRect,
+  findNearest,
+  findUpcoming,
+  findType,
+  findName
+} from './sort';
 import AdaptiveMenu from './menu';
-import createList from './show-adr';
+import { createList, loadLists, clearListContainer } from './show-adr';
 
 ('use strict');
 
@@ -14,6 +23,7 @@ import createList from './show-adr';
   let loginForm = document.querySelector('.modal__login-form');
   let emailInput = loginForm.querySelector('#login-form-email');
   let sortSelect = document.querySelector('.my-notebook__selection-parameters');
+  let searchInput = document.getElementById('nav-search');
   let email, addresses;
 
   function showLoginForm(evt) {
@@ -127,35 +137,63 @@ import createList from './show-adr';
 
     function getUserAddress(email, password) {
       getUserInfo(email, password)
-        .then(user => getUserCreated(user))
+        .then(user => getUserFavourites(user))
         .then(arr => {
+          loadLists(arr);
+          addresses = arr;
+        })
+        .then(() => {
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
           loginLink.classList.add('js-authorized');
-
-          createList(arr);
-          addresses = arr;
         });
     }
   });
 
   function changeOption() {
     let selectedOption = sortSelect.options[sortSelect.selectedIndex];
-
     switch (selectedOption.value) {
-      case 'date':
-        break;
-      case 'upcoming':
-        break;
-      case 'recent':
+      case 'all':
+        clearListContainer();
+        loadLists(addresses);
         break;
       case 'alphabet':
-        createList(sortAbc(addresses));
+        clearListContainer();
+        loadLists(sortAbc(addresses));
+        break;
+      case 'addresses':
+        clearListContainer();
+        loadLists(findType(addresses, 'other'));
+        break;
+      case 'events':
+        clearListContainer();
+        loadLists(findType(addresses, 'event'));
+        break;
+      case 'date':
+        clearListContainer();
+        loadLists(sortByDate(addresses));
+        break;
+      case 'nearest':
+        clearListContainer();
+        getLocation()
+          .then(coords => createRect(coords))
+          .then(rect => loadLists(findNearest(addresses, rect)));
+        break;
+      case 'upcoming':
+        clearListContainer();
+        loadLists(findUpcoming(addresses, 3));
         break;
     }
   }
   sortSelect.addEventListener('change', changeOption);
 
+  //поиск по названию
+  searchInput.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      evt.preventDefault();
+      loadLists(findName(addresses, searchInput.value));
+    }
+  });
   //адаптивное меню
   AdaptiveMenu();
 })();

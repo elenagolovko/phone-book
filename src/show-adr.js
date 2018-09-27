@@ -1,11 +1,49 @@
-export default function createList(arr) {
-  const container = document.getElementById('list'); //контейнер для списка
+//функция, чтобы очищать list-container каждый раз, когда нужно отобразить новый список адресов
+export function clearListContainer() {
+  let listContainer = document.getElementById('list-container');
+  listContainer.innerHTML = '';
+}
+
+//отображение адресов порциями максимум по 10шт
+export function loadLists(arr) {
+  let clone = arr.slice(0); //клон массива, чтобы настоящий массив не обрезался
+  let i = 1;
+  function loadList() {
+    let id = 'list' + i;
+    let newList = document.createElement('ul'); //создаем новый список со своим id, чтобы потом функция createList понимала, куда конкретно вставлять адреса
+    newList.setAttribute('class', 'my-notebook__list');
+    newList.setAttribute('id', id);
+    let listContainer = document.getElementById('list-container');
+    listContainer.appendChild(newList); //вставляем в контейнер для списков
+    if (clone.length > 10) {
+      //если адресов больше 10, создаем 1ый список из 1ых 10ти адресов
+      createList(clone.splice(0, 10), id);
+      let btn = document.createElement('a');
+      btn.setAttribute('href', '#');
+      btn.setAttribute('id', 'btn' + i);
+      btn.setAttribute('class', 'my-notebook__expansion-btn');
+      btn.innerHTML = 'show more';
+      newList.appendChild(btn); //добавляем кнопку, которая будет раскрывать следующий блок и исчезать
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        loadList(); //рекурсия запускает загрузку следующего блока
+        btn.parentNode.removeChild(btn);
+      });
+      i++;
+    } else {
+      //если адесов меньше 10ти просто выводим их без кнопки
+      createList(clone, id);
+    }
+  }
+  loadList();
+}
+export function createList(arr, id) {
+  const container = document.getElementById(id); //контейнер для списка
   container.innerHTML = '';
-  let oldArr = arr.slice();
-  let latestArr = arr.splice(arr.length - 10);
-  oldArr.forEach(function(i) {
-    let address = document.createElement('li');
-    address.setAttribute('class', 'my-notebook__address'); //контейнер для адреса
+  // let latestArr = arr.splice(arr.length - 10);
+  arr.forEach(function(i) {
+    let address = document.createElement('li'); //контейнер для адреса
+    address.setAttribute('class', 'my-notebook__address');
     container.appendChild(address);
     let name = document.createElement('h3'); //название
     name.innerHTML = i.name;
@@ -41,9 +79,9 @@ export default function createList(arr) {
         'Начало: ' +
         i.event_start
           .substr(0, 10)
-          .replace(/(\d{4})-(\d{2})-(\d{2})/, '$3-$2-$1') +
+          .replace(/(\d{4})-(\d{2})-(\d{2})/, '$3-$2-$1') + //переводим дату с машинного в человеческий формат
         ', ' +
-        i.event_start.substr(11, 5);
+        i.event_start.substr(11, 5); //берем время в чч:мм
       address.appendChild(start);
       end.innerHTML =
         'Завершение: ' +

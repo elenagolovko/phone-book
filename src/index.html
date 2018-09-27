@@ -92,18 +92,22 @@
 						<select class="my-notebook__selection-parameters" id="selection-parameters">
 							<option value="all">все</option>
 							<option value="alphabet">по алфавиту</option>
-							<option value="date">по дате</option>
+							<option value="date">по дате (события)</option>
+							<option value="addresses">только адреса</option>
+							<option value="events">только события</option>
 							<option value="upcoming">ближайшие по времени</option>
 							<option value="nearest">ближайшие от меня</option>
 						</select>
 					</fieldset>
 				</form>
 			</div>
-			<ul class="my-notebook__list" id="list">
-				<li class="my-notebook__desc--default">
-					Чтобы увидеть свои адреса необходимо зарегистрироваться!						
-				</li>
-			</ul>
+			<div id=list-container>
+				<!-- <ul class="my-notebook__list" id="list">
+					<li class="my-notebook__desc--default">
+						Чтобы увидеть свои адреса необходимо зарегистрироваться!						
+					</li>
+				</ul> -->
+			</div>
 		</section>
 	</main>
 	<footer class="main__footer">
