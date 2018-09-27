@@ -8,7 +8,6 @@ let description = 'Начало маршрута для пробежки 10км'
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
 export function getUserInfo(email, password) {
-  console.log(email, password);
   return new Promise(function(resolve) {
     fetch('https://staging-api.naviaddress.com/api/v1.5/sessions', {
       method: 'post',
@@ -27,7 +26,6 @@ export function getUserInfo(email, password) {
           id: data.id,
           token: data.token
         };
-        console.log(user);
         resolve(user);
       })
       .catch(error => {
