@@ -135,7 +135,7 @@ function addInfo(token, container, naviaddress, name, description) {
 }
 
 //Получения избранных адресов
-function getUserFavourites(user) {
+export function getUserFavourites(user) {
   return new Promise(function(resolve) {
     fetch(
       'https://staging-api.naviaddress.com/api/v1.5/Addresses/favorites?UserId=' +

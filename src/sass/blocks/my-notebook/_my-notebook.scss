@@ -61,5 +61,11 @@
     margin-bottom: 10px;
     border: 1px dashed black;
     border-radius: 10px;
-  }
+	}
+	&__expansion-btn {
+		width: 100%;
+		text-decoration: underline;
+		cursor: pointer;
+		line-height: 2;
+	}
 }
