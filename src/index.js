@@ -70,7 +70,19 @@ import { createList, loadLists, clearListContainer } from './show-adr';
     }
   }
 
-  loginLink.addEventListener('click', showLoginForm);
+  loginLink.addEventListener('click', event => {
+    if (loginLink.classList.contains('js-authorized')) {
+      loginLink.classList.remove('js-authorized');
+
+      loginLink.textContent = 'Личный кабинет';
+      const addressList = document.getElementById('list');
+      addressList.innerHTML =
+        'Чтобы увидеть свои адреса необходимо зарегистрироваться!';
+    } else {
+      showLoginForm(event);
+    }
+  });
+
   loginLink.addEventListener('keydown', evt => {
     if (
       evt.keyCode === ENTER_KEYCODE &&
@@ -133,6 +145,7 @@ import { createList, loadLists, clearListContainer } from './show-adr';
         .then(() => {
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
+          loginLink.classList.add('js-authorized');
         });
     }
   });
