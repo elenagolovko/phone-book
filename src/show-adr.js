@@ -1,11 +1,9 @@
 export default function createList(arr) {
-  let descriptionDefault = document.querySelector(
-    '.my-notebook__desc--default'
-  );
-  descriptionDefault.setAttribute('style', 'display: none');
   const container = document.getElementById('list'); //контейнер для списка
-  arr.forEach(function(i) {
-    console.log(i);
+  container.innerHTML = '';
+  let oldArr = arr.slice();
+  let latestArr = arr.splice(arr.length - 10);
+  oldArr.forEach(function(i) {
     let address = document.createElement('li');
     address.setAttribute('class', 'my-notebook__address'); //контейнер для адреса
     container.appendChild(address);

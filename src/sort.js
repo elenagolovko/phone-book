@@ -1,9 +1,9 @@
 /*----- СОРТИРОВКА и ПОИСК --------*/
 
 //по алфавиту
-function sortAbc(arr) {
+export function sortAbc(arr) {
   return arr.sort(function(a, b) {
-    return a.name > b.name ? 1 : -1;
+    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1;
   });
 }
 
@@ -28,7 +28,7 @@ function findName(arr, str) {
 }
 
 //сортировка событий по дате
-function sortByDate(arr) {
+export function sortByDate(arr) {
   return arr.sort((a, b) => {
     let date1 = Date.parse(a.event_start.substr(0, 19));
     let date2 = Date.parse(b.event_start.substr(0, 19));
@@ -37,7 +37,7 @@ function sortByDate(arr) {
 }
 
 //поиск ближайших событий
-function findUpcoming(arr, limit) {
+export function findUpcoming(arr, limit) {
   //limit - период поиска в днях (не включая сегодняшний день)
   return arr.filter(n => {
     let date = Date.parse(n.event_start.substr(0, 19));
@@ -83,7 +83,7 @@ function createRect(coords, delta) {
 }
 
 //поиск адресов в заданном квадрате
-function findNearest(arr, coords) {
+export function findNearest(arr, coords) {
   return arr.filter(n => {
     return (
       n.point.lat > coords.lt_lat &&

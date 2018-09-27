@@ -3,7 +3,9 @@
   margin-bottom: 40px;
 
   &__header {
+    margin-bottom: 25px;
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -27,11 +29,14 @@
   &__search-loupe {
     width: fit-content;
 
-    @include centerer(0, 0, (4px, 4px));
+    @include centerer(0, 0, (2px, 10px));
   }
 
-  &__search-input {
-    padding-left: 17px;
+  &__search-input, &__selection-parameters {
+    padding: 10px 0 10px 17px;
+    border: 1px solid #d3d3d2;
+    border-radius: 5px;
+    width: 200px;
   }
 
   &__select-list {

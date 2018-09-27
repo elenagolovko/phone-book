@@ -10,20 +10,4 @@
     box-shadow: 0 0 0 2px #e4e434;
   }
 
-  &:invalid {
-    box-shadow: 0 0 0 2px #ff6f81;
-  }
-
-  &__error {
-    margin-top: -15px;
-    display: inline-block;
-    font-weight: 400;
-    font-size: 11px;
-    color: #f7334a;
-    visibility: hidden;
-  }
-
-  &:invalid + &__error {
-    visibility: visible;
-  }
 }

@@ -79,21 +79,22 @@
 				<div class="my-notebook__search-container">
 					<form class="my-notebook__search" action="#" method="post">
 						<label class="visually-hidden" for="nav-search">Поиск</label>
-						<input class="my-notebook__search-input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
+						<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
 					</form>
 					<div class="my-notebook__search-loupe">
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#000" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
 					</div>
 				</div>
 				<form class="my-notebook__filter" action="#" method="post">
 					<fieldset class="my-notebook__select-list">
-						<legend>Сортировка:</legend>
+						<legend class="visually-hidden">Сортировка:</legend>
 						<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
 						<select class="my-notebook__selection-parameters" id="selection-parameters">
-							<option value="category">по категории</option>
-							<option value="recent-first">сначала недавние</option>
-							<option value="latest-first">сначала давние</option>
+							<option value="all">все</option>
 							<option value="alphabet">по алфавиту</option>
+							<option value="date">по дате</option>
+							<option value="upcoming">ближайшие по времени</option>
+							<option value="nearest">ближайшие от меня</option>
 						</select>
 					</fieldset>
 				</form>

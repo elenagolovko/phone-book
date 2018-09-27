@@ -1,5 +1,6 @@
 import './sass/styles.scss';
 import { getUserInfo, getUserCreated } from './api';
+import { sortByDate, findUpcoming, findNearest, sortAbc } from './sort';
 import AdaptiveMenu from './menu';
 import createList from './show-adr';
 
@@ -12,7 +13,8 @@ import createList from './show-adr';
   let modalWindow = document.querySelector('.modal-login');
   let loginForm = document.querySelector('.modal__login-form');
   let emailInput = loginForm.querySelector('#login-form-email');
-  let email;
+  let sortSelect = document.querySelector('.my-notebook__selection-parameters');
+  let email, addresses;
 
   function showLoginForm(evt) {
     evt.preventDefault();
@@ -114,15 +116,33 @@ import createList from './show-adr';
     function getUserAddress(email, password) {
       getUserInfo(email, password)
         .then(user => getUserCreated(user))
-        .then(arr => createList(arr))
-        .then(user => {
+        .then(arr => {
+          createList(arr);
+          addresses = arr;
+        })
+        .then(() => {
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
-          // let addreses = getUserCreated(user);
-          // createList(addreses);
         });
     }
   });
+
+  function changeOption() {
+    let selectedOption = sortSelect.options[sortSelect.selectedIndex];
+
+    switch (selectedOption.value) {
+      case 'date':
+        break;
+      case 'upcoming':
+        break;
+      case 'recent':
+        break;
+      case 'alphabet':
+        createList(sortAbc(addresses));
+        break;
+    }
+  }
+  sortSelect.addEventListener('change', changeOption);
 
   //адаптивное меню
   AdaptiveMenu();
