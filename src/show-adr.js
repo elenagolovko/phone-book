@@ -35,7 +35,7 @@ export function loadLists(arr) {
       createList(clone, id);
     }
   }
-  load();
+  loadList();
 }
 export function createList(arr, id) {
   const container = document.getElementById(id); //контейнер для списка
