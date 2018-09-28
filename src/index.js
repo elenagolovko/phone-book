@@ -80,7 +80,13 @@ import { createList, loadLists, clearListContainer } from './show-adr';
       for (let i = 0; i < menuLinks.length - 1; i++) {
         menuLinks[i].classList.add('visually-hidden');
       }
+      //Убрать со страницы список адресов
       clearListContainer();
+
+      //показать приветственный текст
+      const welcomeBlock = document.getElementById('js-welcomeBlock');
+      console.log(welcomeBlock);
+      welcomeBlock.classList.remove('visually-hidden');
     } else {
       showLoginForm(event);
     }
@@ -151,6 +157,11 @@ import { createList, loadLists, clearListContainer } from './show-adr';
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
           loginLink.classList.add('js-authorized');
+
+          //скрыть приветственный текст
+          const welcomeBlock = document.getElementById('js-welcomeBlock');
+          console.log(welcomeBlock);
+          welcomeBlock.classList.add('visually-hidden');
 
           const menuLinks = document.querySelectorAll(
             '#js-navigation__list li'
