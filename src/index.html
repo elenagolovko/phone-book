@@ -7,112 +7,114 @@
 </head>
 
 <body class="main">
-	<header class="main__header">
-		<nav class="main__navigation navigation">
-			<ul id="js-navigation__list" class="navigation__list">
-				<li class="navigation__item"><a class="navigation__link link--current" href="#">Главная</a></li>
-				<li class="navigation__item"><a class="navigation__link" href="#new-note">Новая запись</a></li>
-				<li class="navigation__item"><a class="navigation__link" href="#">Моя записная книжка</a></li>
-				<li class="navigation__item"><a class="navigation__link link-login" href="#">Личный кабинет</a></li>
-			</ul>
-			<section class="modal modal-login visually-hidden">
-				<h2 class="visually-hidden">Форма входа</h2>
-				<form class="modal__login-form" action="#" method="post" novalidate>
-					<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
-					<input class="modal__input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
-					<span class="modal__error-message error-message visually-hidden">Некорректный email. Email должен содержать "@"</span>
-					<label class="visually-hidden" for="login-form-password">Ваш пароль</label>
-					<input class="modal__input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
-					<span class="modal__error-message error-message visually-hidden">Длина пароля должна составлять от 6 до 20 символов.</span>
-					<span id="js-errLogin" class="modal__error-message error-message visually-hidden">Неправильный логин или пароль</span>
-					<button class="modal__button" type="submit">Войти</button>
-					<div class="modal__help modal-help">
-						<p class="modal-help__text">
-							<a class="modal-help__link" href="#">Забыли пароль?</a>
-						</p>
-						<p class="modal-help__text">
-							<a class="modal-help__link" href="#">Новая регистрация</a>
-						</p>
-					</div>
-				</form>
-			</section>
-			<button id="js-navigation__btn" class="navigation__btn">
-				<div class="navigation__btn-line"></div>
-				<div class="navigation__btn-line"></div>
-				<div class="navigation__btn-line"></div>
-				<div class="navigation__btn-line"></div>
-			</button>
-		</nav>
-	</header>
-	<main class="main__content">
-		<h2 class="main__title">Добро пожаловать в NaviBook</h2>
-		<section class="main__info">
-			<h2 class="visually-hidden">Описание</h2>
-			<p class="main__description">Приложение для сохранения важной информации о ваших друзьях, коллегах, гостях.</p>
-			<p class="main__reason">Кому пригодится: людям с широким кругом общения, профессионалам в сфере услуг и просто тем, кто хочет помнить важную информацию
-				всегда.</p>
-		</section>
-		<div class="main__l-grid">
-			<section class="new-note" id="new-note">
-				<h2 class="visually-hidden">Создание новой заметки</h2>
-				<p clas="new-note__description">Чтобы создать заметку заполни, пожалуйста, форму</p>
-				<form class="new-note__form" action="#" method="post">
-					<label class="new-note__label" for="name">ФИО</label>
-					<input id="name" class="new-note__input input" type="text">
-					<span class="input__error input__error--length">не менее трёх символов</span>
-					<label class="new-note__label" for="address">Адрес</label>
-					<input id="address" class="new-note__input input" type="text">
-					<label class="new-note__label" for="phone" >Телефон</label>
-					<input id="phone" class="new-note__input input" type="tel">
-					<label class="new-note__label" for="email">Email</label>
-					<input id="email" class="new-note__input input" type="email">
-					<label class="new-note__label" for="preferences">Предпочтения</label>			
-					<textarea id="preferences" class="new-note__input input"></textarea>
-					<button class="new-note__button button" type="submit">Создать</button>
-					<p class="new-note__decription">Сохрани информацию о главном и будь спокоен.</p>
-				</form>
-			</section>
-		</div>
-		<section class="my-notebook">
-			<div class="my-notebook__header">
-				<h2 class="my-notebook__title">Моя записная книжка</h2>
-				<div class="my-notebook__search-container">
-					<form class="my-notebook__search" action="#" method="post">
-						<label class="visually-hidden" for="nav-search">Поиск</label>
-						<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
+	<div class="container">
+		<header class="main__header">
+			<nav class="main__navigation navigation">
+				<ul id="js-navigation__list" class="navigation__list">
+					<li class="navigation__item visually-hidden"><a class="navigation__link link--current" href="#">Записная книжка</a></li>
+					<li class="navigation__item visually-hidden"><a class="navigation__link" href="#">Карта</a></li>
+					<li class="navigation__item"><a class="navigation__link link-login" href="#">Личный кабинет</a></li>
+				</ul>
+				<section class="modal modal-login visually-hidden">
+					<h2 class="visually-hidden">Форма входа</h2>
+					<form class="modal__login-form" action="#" method="post" novalidate>
+						<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
+						<input class="modal__input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
+						<span class="modal__error-message error-message visually-hidden">Некорректный email. Email должен содержать "@"</span>
+						<label class="visually-hidden" for="login-form-password">Ваш пароль</label>
+						<input class="modal__input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
+						<span class="modal__error-message error-message visually-hidden">Длина пароля должна составлять от 6 до 20 символов.</span>
+						<span id="js-errLogin" class="modal__error-message error-message visually-hidden">Неправильный логин или пароль</span>
+						<button class="modal__button" type="submit">Войти</button>
+						<div class="modal__help modal-help">
+							<p class="modal-help__text">
+								<a class="modal-help__link" href="#">Забыли пароль?</a>
+							</p>
+							<p class="modal-help__text">
+								<a class="modal-help__link" href="#">Новая регистрация</a>
+							</p>
+						</div>
 					</form>
-					<div class="my-notebook__search-loupe">
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
+				</section>
+				<button id="js-navigation__btn" class="navigation__btn">
+					<div class="navigation__btn-line"></div>
+					<div class="navigation__btn-line"></div>
+					<div class="navigation__btn-line"></div>
+					<div class="navigation__btn-line"></div>
+				</button>
+			</nav>
+		</header>
+		<main class="main__content">
+			<h2 class="main__title">Добро пожаловать в NaviBook</h2>
+			<section id="js-welcomeBlock" class="main__info">
+				<h2 class="visually-hidden">Описание</h2>
+				<p class="main__description">Приложение для сохранения важной информации о ваших друзьях, коллегах, гостях.</p>
+				<p class="main__reason">Кому пригодится: людям с широким кругом общения, профессионалам в сфере услуг и просто тем, кто хочет помнить важную информацию
+					всегда.</p>
+				<a href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Зарегистрироваться можно здесь</a>
+			</section>
+			<div class="main__l-grid">
+				<section class="new-note" id="new-note">
+					<h2 class="visually-hidden">Создание новой заметки</h2>
+					<p clas="new-note__description">Чтобы создать заметку заполни, пожалуйста, форму</p>
+					<form class="new-note__form" action="#" method="post">
+						<label class="new-note__label" for="name">ФИО</label>
+						<input id="name" class="new-note__input input" type="text">
+						<span class="input__error input__error--length">не менее трёх символов</span>
+						<label class="new-note__label" for="address">Адрес</label>
+						<input id="address" class="new-note__input input" type="text">
+						<label class="new-note__label" for="phone" >Телефон</label>
+						<input id="phone" class="new-note__input input" type="tel">
+						<label class="new-note__label" for="email">Email</label>
+						<input id="email" class="new-note__input input" type="email">
+						<label class="new-note__label" for="preferences">Предпочтения</label>			
+						<textarea id="preferences" class="new-note__input input"></textarea>
+						<button class="new-note__button button" type="submit">Создать</button>
+						<p class="new-note__decription">Сохрани информацию о главном и будь спокоен.</p>
+					</form>
+				</section>
+			</div>
+			<section class="my-notebook">
+				<div class="my-notebook__header">
+					<h2 class="my-notebook__title">Моя записная книжка</h2>
+					<div class="my-notebook__search-container">
+						<form class="my-notebook__search" action="#" method="post">
+							<label class="visually-hidden" for="nav-search">Поиск</label>
+							<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
+						</form>
+						<div class="my-notebook__search-loupe">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
+						</div>
 					</div>
+					<form class="my-notebook__filter" action="#" method="post">
+						<fieldset class="my-notebook__select-list">
+							<legend class="visually-hidden">Сортировка:</legend>
+							<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
+							<select class="my-notebook__selection-parameters" id="selection-parameters">
+								<option value="all">все</option>
+								<option value="alphabet">по алфавиту</option>
+								<option value="date">по дате (события)</option>
+								<option value="addresses">только адреса</option>
+								<option value="events">только события</option>
+								<option value="upcoming">ближайшие по времени</option>
+								<option value="nearest">ближайшие от меня</option>
+							</select>
+						</fieldset>
+					</form>
 				</div>
-				<form class="my-notebook__filter" action="#" method="post">
-					<fieldset class="my-notebook__select-list">
-						<legend class="visually-hidden">Сортировка:</legend>
-						<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
-						<select class="my-notebook__selection-parameters" id="selection-parameters">
-							<option value="all">все</option>
-							<option value="alphabet">по алфавиту</option>
-							<option value="date">по дате (события)</option>
-							<option value="addresses">только адреса</option>
-							<option value="events">только события</option>
-							<option value="upcoming">ближайшие по времени</option>
-							<option value="nearest">ближайшие от меня</option>
-						</select>
-					</fieldset>
-				</form>
-			</div>
-			<div id=list-container>
-				<!-- <ul class="my-notebook__list" id="list">
-					<li class="my-notebook__desc--default">
-						Чтобы увидеть свои адреса необходимо зарегистрироваться!						
-					</li>
-				</ul> -->
-			</div>
-		</section>
-	</main>
-	<footer class="main__footer">
-		<p class="footer-text">Пустой футер :)</p>
-	</footer>
+				<div id="list-container">
+					<!-- <ul class="my-notebook__list" id="list">
+						<li class="my-notebook__desc--default">
+							Чтобы увидеть свои адреса необходимо зарегистрироваться!						
+						</li>
+					</ul> -->
+				</div>
+			</section>
+		</main>
+		<footer class="main__footer">
+			<p class="footer-text">&#169; 2018 JuniorPower</p>
+		</footer>
+	</div>
 </body>
 
 </html>

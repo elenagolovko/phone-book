@@ -75,9 +75,18 @@ import { createList, loadLists, clearListContainer } from './show-adr';
       loginLink.classList.remove('js-authorized');
 
       loginLink.textContent = 'Личный кабинет';
-      const addressList = document.getElementById('list');
-      addressList.innerHTML =
-        'Чтобы увидеть свои адреса необходимо зарегистрироваться!';
+      //Удалить меню для личного кабинета
+      const menuLinks = document.querySelectorAll('#js-navigation__list li');
+      for (let i = 0; i < menuLinks.length - 1; i++) {
+        menuLinks[i].classList.add('visually-hidden');
+      }
+      //Убрать со страницы список адресов
+      clearListContainer();
+
+      //показать приветственный текст
+      const welcomeBlock = document.getElementById('js-welcomeBlock');
+      console.log(welcomeBlock);
+      welcomeBlock.classList.remove('visually-hidden');
     } else {
       showLoginForm(event);
     }
@@ -136,6 +145,8 @@ import { createList, loadLists, clearListContainer } from './show-adr';
     }
 
     function getUserAddress(email, password) {
+      loginLink.textContent = 'Загрузка данных ...';
+
       getUserInfo(email, password)
         .then(user => getUserFavourites(user))
         .then(arr => {
@@ -146,6 +157,18 @@ import { createList, loadLists, clearListContainer } from './show-adr';
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
           loginLink.classList.add('js-authorized');
+
+          //скрыть приветственный текст
+          const welcomeBlock = document.getElementById('js-welcomeBlock');
+          console.log(welcomeBlock);
+          welcomeBlock.classList.add('visually-hidden');
+
+          const menuLinks = document.querySelectorAll(
+            '#js-navigation__list li'
+          );
+          for (let i = 0; i < menuLinks.length - 1; i++) {
+            menuLinks[i].classList.remove('visually-hidden');
+          }
         });
     }
   });
