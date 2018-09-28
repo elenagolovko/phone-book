@@ -1,0 +1,25 @@
+.action-buttons {
+  margin: 30px 0;
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    margin: 0 10px 15px 0;
+  }
+
+  &__button {
+    @include button(15px, 18px);
+  }
+
+  &__button:focus {
+    box-shadow: 0 0 0 2px #e4e434;
+  }
+}

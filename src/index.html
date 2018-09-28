@@ -17,7 +17,8 @@
 			</ul>
 			<section class="modal modal-login visually-hidden">
 				<h2 class="visually-hidden">Форма входа</h2>
-				<form class="modal__login-form" action="#" method="post" novalidate>
+				<button type="button" class="modal__cancel cancel">Закрыть</button>
+				<form class="modal__login-form modal__form" action="#" method="post" novalidate>
 					<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
 					<input class="modal__input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
 					<span class="modal__error-message error-message visually-hidden">Некорректный email. Email должен содержать "@"</span>
@@ -52,61 +53,77 @@
 			<p class="main__reason">Кому пригодится: людям с широким кругом общения, профессионалам в сфере услуг и просто тем, кто хочет помнить важную информацию
 				всегда.</p>
 		</section>
-		<div class="main__l-grid">
-			<section class="new-note" id="new-note">
-				<h2 class="visually-hidden">Создание новой заметки</h2>
-				<p clas="new-note__description">Чтобы создать заметку заполни, пожалуйста, форму</p>
-				<form class="new-note__form" action="#" method="post">
-					<label class="new-note__label" for="name">ФИО</label>
-					<input id="name" class="new-note__input input" type="text">
-					<span class="input__error input__error--length">не менее трёх символов</span>
-					<label class="new-note__label" for="address">Адрес</label>
-					<input id="address" class="new-note__input input" type="text">
-					<label class="new-note__label" for="phone" >Телефон</label>
-					<input id="phone" class="new-note__input input" type="tel">
-					<label class="new-note__label" for="email">Email</label>
-					<input id="email" class="new-note__input input" type="email">
-					<label class="new-note__label" for="preferences">Предпочтения</label>			
-					<textarea id="preferences" class="new-note__input input"></textarea>
-					<button class="new-note__button button" type="submit">Создать</button>
-					<p class="new-note__decription">Сохрани информацию о главном и будь спокоен.</p>
-				</form>
-			</section>
-		</div>
+		<section class="action-buttons main__action-buttons">
+			<h2 class="action-buttons__title visually-hidden">Действия с навиадресом</h2>
+			<ul class="action-buttons__list action">
+				<li class="action-buttons__item">
+					<button class="button action-buttons__button create__button" type="button">Создать Навиадрес</button>
+					<section class="modal modal__new-note visually-hidden" id="new-note">
+						<h2 class="visually-hidden">Создание нового навиадреса</h2>
+						<p class="new-note__description">Чтобы создать навиадрес заполни, пожалуйста, форму</p>
+						<button type="button" class="modal__cancel cancel">Закрыть</button>
+						<form class="new-note__form modal__form" action="#" method="post">
+							<label class="new-note__label visually-hidden" for="newLat">Широта</label>
+							<input id="newLat" name="newLat" class="new-note__input modal__input" type="text" placeholder="Широта">
+							<label class="new-note__label visually-hidden" for="newLng">Долгота</label>
+							<input id="newLng" name="newLng" class="new-note__input modal__input" type="text" placeholder="Долгота">
+							<label class="new-note__label visually-hidden" for="name" >Название</label>
+							<input id="name" name ="name" class="new-note__input modal__input" type="text" placeholder="Название">
+							<label class="new-note__label visually-hidden" for="description">Описание</label>
+							<input id="description" name="description" class="new-note__input modal__input" type="text" placeholder="Описание">
+							<button class="new-note__button button" type="submit">Добавить</button>
+						</form>
+					</section>
+				</li>
+				<li class="action-buttons__item">
+					<button class="button action-buttons__button search__button" type="button">Найти Навиадрес</button>
+					<section class="modal modal__search visually-hidden">
+						<button type="button" class="modal__cancel cancel">Закрыть</button>
+						<form class="my-notebook__search modal__form" action="#" method="post">
+							<label class="visually-hidden" for="nav-search">Поиск</label>
+							<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
+						</form>
+						<div class="my-notebook__search-loupe">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
+						</div>
+					</section>
+				</li>
+				<li class="action-buttons__item">
+					<button class="button action-buttons__button sort__button" type="button">Сортировать Навиадреса</button>
+					<section class="modal modal__sort visually-hidden">
+						<button type="button" class="modal__cancel cancel">Закрыть</button>
+						<form class="my-notebook__filter modal__form" action="#" method="post">
+							<fieldset class="my-notebook__select-list">
+								<legend class="visually-hidden">Сортировка:</legend>
+								<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
+								<select class="my-notebook__selection-parameters" id="selection-parameters">
+									<option value="all">все</option>
+									<option value="alphabet">по алфавиту</option>
+									<option value="date">по дате (события)</option>
+									<option value="addresses">только адреса</option>
+									<option value="events">только события</option>
+									<option value="upcoming">ближайшие по времени</option>
+									<option value="nearest">ближайшие от меня</option>
+								</select>
+							</fieldset>
+						</form>
+					</section>
+				</li>
+				<li class="action-buttons__item">
+					<button class="button action-buttons__button" type="button">Удалить Навиадрес</button>
+				</li>
+			</ul>
+		</section>
 		<section class="my-notebook">
 			<div class="my-notebook__header">
 				<h2 class="my-notebook__title">Моя записная книжка</h2>
-				<div class="my-notebook__search-container">
-					<form class="my-notebook__search" action="#" method="post">
-						<label class="visually-hidden" for="nav-search">Поиск</label>
-						<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
-					</form>
-					<div class="my-notebook__search-loupe">
-						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
-					</div>
-				</div>
-				<form class="my-notebook__filter" action="#" method="post">
-					<fieldset class="my-notebook__select-list">
-						<legend class="visually-hidden">Сортировка:</legend>
-						<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
-						<select class="my-notebook__selection-parameters" id="selection-parameters">
-							<option value="all">все</option>
-							<option value="alphabet">по алфавиту</option>
-							<option value="date">по дате (события)</option>
-							<option value="addresses">только адреса</option>
-							<option value="events">только события</option>
-							<option value="upcoming">ближайшие по времени</option>
-							<option value="nearest">ближайшие от меня</option>
-						</select>
-					</fieldset>
-				</form>
 			</div>
-			<div id=list-container>
-				<!-- <ul class="my-notebook__list" id="list">
-					<li class="my-notebook__desc--default">
+			<div id="list-container">
+				<!-- <ul class="my-notebook__list" id="list"> -->
+					<p class="">
 						Чтобы увидеть свои адреса необходимо зарегистрироваться!						
-					</li>
-				</ul> -->
+					</p>
+				<!-- </ul> -->
 			</div>
 		</section>
 	</main>
