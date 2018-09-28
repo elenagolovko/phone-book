@@ -31,6 +31,9 @@ export function getUserInfo(email, password) {
       .catch(error => {
         console.log('Request failed', error);
 
+        const loginLink = document.querySelector('.link-login');
+        loginLink.textContent = 'Личный кабинет';
+
         document
           .getElementById('js-errLogin')
           .classList.remove('visually-hidden');

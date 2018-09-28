@@ -2,3 +2,13 @@
 * {
   outline: none;
 }
+
+body {
+  background-color: lightyellow;
+}
+
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  background-color: white;
+}
