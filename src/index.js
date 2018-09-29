@@ -222,6 +222,7 @@ import { showMyAdresses, showFavorites, cleanSlider } from './js/slider';
   searchInput.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       evt.preventDefault();
+      clearListContainer();
       loadLists(findName(addresses, searchInput.value));
     }
   });
