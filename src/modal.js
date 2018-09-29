@@ -1,5 +1,16 @@
 import { resetInputState } from './validation';
 
+export function hideForm(modalWindow) {
+  if (!modalWindow.classList.contains('visually-hidden')) {
+    modalWindow.classList.add('visually-hidden');
+    let inputs = modalWindow.querySelectorAll('.modal__input');
+    inputs.forEach(element => {
+      element.value = '';
+      resetInputState(element);
+    });
+  }
+}
+
 export function setModal(modalSelector, openSelector) {
   let ENTER_KEYCODE = 13;
   let ESC__KEYCODE = 27;
@@ -15,29 +26,20 @@ export function setModal(modalSelector, openSelector) {
     modalWindow.classList.remove('visually-hidden');
   }
 
-  function hideForm() {
-    if (!modalWindow.classList.contains('visually-hidden')) {
-      modalWindow.classList.add('visually-hidden');
-      let inputs = modalWindow.querySelectorAll('.modal__input');
-      inputs.forEach(element => {
-        element.value = '';
-        resetInputState(element);
-      });
-    }
-  }
-
   createLink.addEventListener('click', showForm);
   createLink.addEventListener('keydown', evt => {
     if (evt.keyCode === ENTER_KEYCODE) {
-      hideForm();
+      hideForm(modalWindow);
     }
   });
 
-  cancelBtn.addEventListener('click', hideForm);
+  cancelBtn.addEventListener('click', () => {
+    hideForm(modalWindow);
+  });
 
   window.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ESC__KEYCODE) {
-      hideForm();
+      hideForm(modalWindow);
     }
   });
 }

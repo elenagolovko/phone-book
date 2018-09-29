@@ -18,7 +18,7 @@ import {
 import AdaptiveMenu from './menu';
 import { createList, loadLists, clearListContainer } from './show-adr';
 import { showMyAdresses, showFavorites, cleanSlider } from './js/slider';
-import { handleModal, setModal } from './modal';
+import { handleModal, setModal, hideForm } from './modal';
 import {
   validatePos,
   validateEmail,
@@ -36,11 +36,21 @@ import {
   let loginForm = document.querySelector('.modal__login-form');
   let sortSelect = document.querySelector('.my-notebook__selection-parameters');
   let searchInput = document.getElementById('nav-search');
+  let modalCreateWindow = document.querySelector('.modal__new-note');
   let createForm = document.querySelector('.new-note__form');
   let searchButton = document.querySelector('.search__button');
   let sortButton = document.querySelector('.sort__button');
+  let actionButtons = document.querySelectorAll('.action-buttons__button');
   let userData;
   let addresses;
+
+  function switchButtonState() {
+    let actionButtons = document.querySelectorAll('.action-buttons__button');
+
+    for (let i = 0; i < actionButtons.length; i++) {
+      actionButtons[i].classList.remove('action-buttons__button--disabled');
+    }
+  }
 
   function getLoginInfo() {
     return handleModal('.modal-login', '.link-login', {
@@ -72,6 +82,10 @@ import {
     if (loginLink.classList.contains('js-authorized')) {
       loginLink.classList.remove('js-authorized');
 
+      for (let i = 0; i < actionButtons.length; i++) {
+        actionButtons[i].classList.add('action-buttons__button--disabled');
+      }
+
       loginLink.textContent = 'Личный кабинет';
       //Удалить меню для личного кабинета
       const menuLinks = document.querySelectorAll('#js-navigation__list li');
@@ -95,27 +109,29 @@ import {
   let loginInfo = getLoginInfo();
   let newAddressInfo = getNewAddressInfo();
 
-  loginLink.addEventListener('click', evt => {
-    if (evt.target.classList.contains('js-authorized')) {
-      evt.target.classList.remove('js-authorized');
+  //Мне кажется это повторение блока выше :)
 
-      evt.target.textContent = 'Личный кабинет';
-      //Удалить меню для личного кабинета
-      const menuLinks = document.querySelectorAll('#js-navigation__list li');
-      for (let i = 0; i < menuLinks.length - 1; i++) {
-        menuLinks[i].classList.add('visually-hidden');
-      }
-      //Убрать со страницы список адресов
-      clearListContainer();
+  // loginLink.addEventListener('click', evt => {
+  //   if (evt.target.classList.contains('js-authorized')) {
+  //     evt.target.classList.remove('js-authorized');
 
-      //показать приветственный текст
-      const welcomeBlock = document.getElementById('js-welcomeBlock');
-      console.log(welcomeBlock);
-      welcomeBlock.classList.remove('visually-hidden');
-    } else {
-      modalLoginWindow.classList.remove('visually-hidden');
-    }
-  });
+  //     evt.target.textContent = 'Личный кабинет';
+  //     //Удалить меню для личного кабинета
+  //     const menuLinks = document.querySelectorAll('#js-navigation__list li');
+  //     for (let i = 0; i < menuLinks.length - 1; i++) {
+  //       menuLinks[i].classList.add('visually-hidden');
+  //     }
+  //     //Убрать со страницы список адресов
+  //     clearListContainer();
+
+  //     //показать приветственный текст
+  //     const welcomeBlock = document.getElementById('js-welcomeBlock');
+  //     console.log(welcomeBlock);
+  //     welcomeBlock.classList.remove('visually-hidden');
+  //   } else {
+  //     modalLoginWindow.classList.remove('visually-hidden');
+  //   }
+  // });
 
   loginForm.addEventListener('submit', () => {
     function getUserAddress(email, password) {
@@ -127,6 +143,8 @@ import {
 
           loginLink.textContent = 'Выход';
           loginLink.classList.add('js-authorized');
+
+          hideForm(modalLoginWindow);
 
           //скрыть приветственный текст
           const welcomeBlock = document.getElementById('js-welcomeBlock');
@@ -147,10 +165,6 @@ import {
 
           showFavorites(userData);
           showMyAdresses(userData);
-          let actionButtons = document.querySelectorAll(
-            '.action-buttons__button'
-          );
-
           for (let i = 0; i < actionButtons.length; i++) {
             actionButtons[i].classList.remove(
               'action-buttons__button--disabled'
@@ -160,7 +174,6 @@ import {
     }
 
     getLoginInfo();
-    console.log(loginInfo);
 
     if (!loginInfo.validity) {
       return;
@@ -171,16 +184,21 @@ import {
   createForm.addEventListener('submit', () => {
     getNewAddressInfo();
 
-    getUserInfo(loginInfo.email, loginInfo.password).then(user =>
-      createAddress(
-        user,
-        newAddressInfo.newLat,
-        newAddressInfo.newLng,
-        newAddressInfo.name,
-        newAddressInfo.description
+    getUserInfo(loginInfo.email, loginInfo.password)
+      .then(user =>
+        createAddress(
+          user,
+          newAddressInfo.newLat,
+          newAddressInfo.newLng,
+          newAddressInfo.name,
+          newAddressInfo.description
+        )
       )
-    );
-
+      .then(() => {
+        if (newAddressInfo.validity) {
+          hideForm(modalCreateWindow);
+        }
+      });
     console.log(newAddressInfo);
   });
 
