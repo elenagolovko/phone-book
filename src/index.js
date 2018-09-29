@@ -17,14 +17,13 @@ import {
 } from './sort';
 import AdaptiveMenu from './menu';
 import { createList, loadLists, clearListContainer } from './show-adr';
-import handleModal from './modal';
+import { handleModal, setModal } from './modal';
 import { validatePos, validateEmail, validatePassword } from './validation';
 
 ('use strict');
 
 (function() {
   let ENTER_KEYCODE = 13;
-  // let ESC__KEYCODE = 27;
   let loginLink = document.querySelector('.link-login');
   let modalLoginWindow = document.querySelector('.modal-login');
   let loginForm = document.querySelector('.modal__login-form');
@@ -49,18 +48,12 @@ import { validatePos, validateEmail, validatePassword } from './validation';
     });
   }
 
-  function getSearchInfo() {
-    return handleModal('.modal__search', '.search__button', {});
-  }
+  setModal('.modal__search', '.search__button');
 
-  function getSortInfo() {
-    return handleModal('.modal__sort', '.sort__button', {});
-  }
+  setModal('.modal__sort', '.sort__button');
 
   let loginInfo = getLoginInfo();
   let newAddressInfo = getNewAddressInfo();
-  let searchInfo = getSearchInfo();
-  let sortInfo = getSortInfo();
 
   loginLink.addEventListener('click', evt => {
     if (evt.target.classList.contains('js-authorized')) {
@@ -95,6 +88,15 @@ import { validatePos, validateEmail, validatePassword } from './validation';
         .then(() => {
           loginLink.textContent = 'Выход';
           loginLink.classList.add('js-authorized');
+          let actionButtons = document.querySelectorAll(
+            '.action-buttons__button'
+          );
+
+          for (let i = 0; i < actionButtons.length; i++) {
+            actionButtons[i].classList.remove(
+              'action-buttons__button--disabled'
+            );
+          }
         });
     }
 
@@ -124,8 +126,6 @@ import { validatePos, validateEmail, validatePassword } from './validation';
   });
 
   searchButton.addEventListener('click', () => {
-    getSearchInfo();
-
     //поиск по названию
     searchInput.addEventListener('keydown', function(evt) {
       if (evt.keyCode === ENTER_KEYCODE) {
@@ -136,8 +136,6 @@ import { validatePos, validateEmail, validatePassword } from './validation';
   });
 
   sortButton.addEventListener('click', () => {
-    getSortInfo();
-
     function changeOption() {
       let selectedOption = sortSelect.options[sortSelect.selectedIndex];
       switch (selectedOption.value) {

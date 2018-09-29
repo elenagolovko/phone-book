@@ -1,9 +1,13 @@
 export function resetInputState(element) {
   if (element.classList.contains('modal__input--invalid')) {
     element.classList.remove('modal__input--invalid');
-    let errorMessage = element.nextElementSibling;
-    errorMessage.classList.add('visually-hidden');
+    let errorMessage;
+    if (element.nextElementSibling.classList.contains('modal__error-message')) {
+      errorMessage = element.nextElementSibling;
+      errorMessage.classList.add('visually-hidden');
+    }
     if (
+      element.classList.contains('login-input') &&
       errorMessage.nextElementSibling.classList.contains('modal__error-message')
     ) {
       errorMessage.nextElementSibling.classList.add('visually-hidden');
@@ -17,7 +21,13 @@ function setErrorState(element) {
 }
 
 export function validatePos(value, element) {
-  return true;
+  if (/\d+\.\d/gm.test(value)) {
+    resetInputState(element);
+    return true;
+  } else {
+    setErrorState(element);
+    return false;
+  }
 }
 
 export function validateEmail(value, element) {

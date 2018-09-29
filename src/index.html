@@ -20,10 +20,10 @@
 				<button type="button" class="modal__cancel cancel">Закрыть</button>
 				<form class="modal__login-form modal__form" action="#" method="post" novalidate>
 					<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
-					<input class="modal__input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
+					<input class="modal__input login-input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
 					<span class="modal__error-message error-message visually-hidden">Некорректный email. Email должен содержать "@"</span>
 					<label class="visually-hidden" for="login-form-password">Ваш пароль</label>
-					<input class="modal__input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
+					<input class="modal__input login-input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
 					<span class="modal__error-message error-message visually-hidden">Длина пароля должна составлять от 6 до 20 символов.</span>
 					<span id="js-errLogin" class="modal__error-message error-message visually-hidden">Неправильный логин или пароль</span>
 					<button class="modal__button" type="submit">Войти</button>
@@ -57,7 +57,7 @@
 			<h2 class="action-buttons__title visually-hidden">Действия с навиадресом</h2>
 			<ul class="action-buttons__list action">
 				<li class="action-buttons__item">
-					<button class="button action-buttons__button create__button" type="button">Создать Навиадрес</button>
+					<button class="button action-buttons__button create__button action-buttons__button--disabled" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!" type="button">Создать Навиадрес</button>
 					<section class="modal modal__new-note visually-hidden" id="new-note">
 						<h2 class="visually-hidden">Создание нового навиадреса</h2>
 						<p class="new-note__description">Чтобы создать навиадрес заполни, пожалуйста, форму</p>
@@ -65,8 +65,10 @@
 						<form class="new-note__form modal__form" action="#" method="post">
 							<label class="new-note__label visually-hidden" for="newLat">Широта</label>
 							<input id="newLat" name="newLat" class="new-note__input modal__input" type="text" placeholder="Широта">
+							<span class="modal__error-message error-message visually-hidden">Некорректное значение</span>
 							<label class="new-note__label visually-hidden" for="newLng">Долгота</label>
 							<input id="newLng" name="newLng" class="new-note__input modal__input" type="text" placeholder="Долгота">
+							<span class="modal__error-message error-message visually-hidden">Некорректное значение</span>
 							<label class="new-note__label visually-hidden" for="name" >Название</label>
 							<input id="name" name ="name" class="new-note__input modal__input" type="text" placeholder="Название">
 							<label class="new-note__label visually-hidden" for="description">Описание</label>
@@ -76,7 +78,7 @@
 					</section>
 				</li>
 				<li class="action-buttons__item">
-					<button class="button action-buttons__button search__button" type="button">Найти Навиадрес</button>
+					<button class="button action-buttons__button search__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Найти Навиадрес</button>
 					<section class="modal modal__search visually-hidden">
 						<button type="button" class="modal__cancel cancel">Закрыть</button>
 						<form class="my-notebook__search modal__form" action="#" method="post">
@@ -89,7 +91,7 @@
 					</section>
 				</li>
 				<li class="action-buttons__item">
-					<button class="button action-buttons__button sort__button" type="button">Сортировать Навиадреса</button>
+					<button class="button action-buttons__button sort__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Сортировать Навиадреса</button>
 					<section class="modal modal__sort visually-hidden">
 						<button type="button" class="modal__cancel cancel">Закрыть</button>
 						<form class="my-notebook__filter modal__form" action="#" method="post">
@@ -110,7 +112,7 @@
 					</section>
 				</li>
 				<li class="action-buttons__item">
-					<button class="button action-buttons__button" type="button">Удалить Навиадрес</button>
+					<button class="button action-buttons__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
 				</li>
 			</ul>
 		</section>

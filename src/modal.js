@@ -1,20 +1,18 @@
 import { resetInputState } from './validation';
 
-export default function handleModal(modalSelector, openSelector, validators) {
+export function setModal(modalSelector, openSelector) {
   let ENTER_KEYCODE = 13;
   let ESC__KEYCODE = 27;
   let modalWindow = document.querySelector(modalSelector);
-  let form = modalWindow.querySelector('.modal__form');
   let createLink = document.querySelector(openSelector);
   let cancelBtn = modalWindow.querySelector('.modal__cancel');
-  let result = {};
-
-  // let latInput = form.querySelector("#newLat");
 
   function showForm(evt) {
     evt.preventDefault();
+    if (createLink.classList.contains('action-buttons__button--disabled')) {
+      return;
+    }
     modalWindow.classList.remove('visually-hidden');
-    // latInput.focus();
   }
 
   function hideForm() {
@@ -42,6 +40,14 @@ export default function handleModal(modalSelector, openSelector, validators) {
       hideForm();
     }
   });
+}
+
+export function handleModal(modalSelector, openSelector, validators) {
+  let modalWindow = document.querySelector(modalSelector);
+  let form = modalWindow.querySelector('.modal__form');
+  let result = {};
+
+  setModal(modalSelector, openSelector);
 
   form.addEventListener('submit', evt => {
     evt.preventDefault();
@@ -67,10 +73,23 @@ export default function handleModal(modalSelector, openSelector, validators) {
             result.validity = false;
           }
           break;
-        // case '':
-        //   break;
-        // case '':
-        //   break;
+        case 'newLat':
+          validity = validators.validatePos(element.value, element);
+          Object.defineProperty(result, 'validity', {
+            value: validity,
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+          break;
+        case 'newLng':
+          validity = validators.validatePos(element.value, element);
+          if (validity && result.validity) {
+            result.validity = true;
+          } else {
+            result.validity = false;
+          }
+          break;
       }
       Object.defineProperty(result, element.name, {
         value: element.value,

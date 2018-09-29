@@ -22,4 +22,10 @@
   &__button:focus {
     box-shadow: 0 0 0 2px #e4e434;
   }
+
+  &__button--disabled {
+    background-color: #dddddd;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.9);
+  }
 }
