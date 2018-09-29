@@ -1,25 +1,14 @@
 .new-note {
-  &__form {
-    display: flex;
-    flex-direction: column;
-    max-width: 200px;
-    margin: 0 auto 30px auto;
-    padding: 10px 30px;
-    border-radius: 10px;
+  &__description {
+    margin: 30px 0 0 0;
+    padding: 10px;
   }
 
-  &__label {
-    text-align: left;
-    margin-bottom: 5px;
-  }
-
-  &__input {
-    padding: 10px 0 10px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 0 0 1px rgb(134, 132, 132);
-  }
-
-  &__button {
-    @include button(20px, 16px);
+  &__button {  
+    @include button(12px, 14px);
+  
+    &:focus {
+      box-shadow: 0 0 0 2px #e4e434;
+    }
   }
 }
