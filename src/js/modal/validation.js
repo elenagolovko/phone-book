@@ -41,7 +41,7 @@ export function validateEmail(value, element) {
 }
 
 export function validatePassword(value, element) {
-  if (value.length < 8 || value.lenth > 20) {
+  if (value.length < 6 || value.lenth > 20) {
     setErrorState(element);
     return false;
   } else {

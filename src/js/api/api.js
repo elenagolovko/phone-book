@@ -1,10 +1,21 @@
-// Эти данные нужно будет получать из форм
-// export const email = 'ekaterina.dony@yandex.ru';
-// export const password = '71115317';
-// let newLat = 55.775277;
-// let newLng = 37.819246;
-// let name = 'Старт';
-// let description = 'Начало маршрута для пробежки 10км';
+/*----
+Чтобы создать новый адрес, запускаем:
+getUserInfo(email, password).then((user) => createAddress(user));
+
+Чтобы получить избранные адреса:
+getUserInfo(email, password).then((user) => getUserFavourites(user));
+
+Чтобы получить созданные:
+getUserInfo(email, password).then((user) => getUserCreated(user));
+
+Так можно внести изменения в уже существующий адрес. Соответственно переменные
+тоже должны откуда-то браться, а пока произвольно задаются
+let container = 7;
+let naviaddress = 703337;
+let newDescription = 'Хорошее начало маршрута для пробежки 10км, но не в такую погоду';
+
+getUserInfo(email, password).then((user) => addInfo(user.token, container, naviaddress, name, newDescription));
+----*/
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
 export function getUserInfo(email, password) {
@@ -29,7 +40,7 @@ export function getUserInfo(email, password) {
         resolve(user);
       })
       .catch(error => {
-        console.log('Request failed', error);
+        console.warn('Request failed', error);
 
         const loginLink = document.querySelector('.link-login');
         loginLink.textContent = 'Личный кабинет';
@@ -47,6 +58,11 @@ export function getUserInfo(email, password) {
       });
   });
 }
+
+// let newLat = 55.775277;
+// let newLng = 37.819246;
+// let name = 'Старт';
+// let description = 'Начало маршрута для пробежки 10км';
 
 //Создание адреса
 export function createAddress(user, newLat, newLng, name, description) {
@@ -72,7 +88,7 @@ export function createAddress(user, newLat, newLng, name, description) {
       acceptAddress(token, container, naviaddress, name, description);
     })
     .catch(function(error) {
-      console.log('Request failed', error);
+      console.warn('Request failed', error);
     });
 }
 
@@ -98,7 +114,7 @@ function acceptAddress(token, container, naviaddress, name, description) {
       addInfo(token, container, naviaddress, name, description);
     })
     .catch(function(error) {
-      console.log('Request failed', error);
+      console.warn('Request failed', error);
     });
 }
 
@@ -120,18 +136,18 @@ function addInfo(token, container, naviaddress, name, description) {
         description: description,
         map_visibility: 'true'
       })
-      /*В body может быть много параметром, обязательные - это lang и name, остальные я просто для примера добавила.
-Надо еще доработать, чтоб функция могла любую инфу, которую юзер заполнил, добавлять*/
+      /*В body может быть много параметром, обязательные - это lang и name,
+      остальные я просто для примера добавила. Надо еще доработать,
+      чтоб функция могла любую инфу, которую юзер заполнил, добавлять*/
     }
   )
     .then(response => response.json())
     .then(data => {
-      console.log(
-        data
-      ); /*информацию о получившемся адресе можно посмотреть в консоли, чисто для нас, для проверки*/
+      //TODO: доделать
+      console.log('addInfo: ', data);
     })
     .catch(function(error) {
-      console.log('Request failed', error);
+      console.warn('Request failed', error);
     });
 }
 
@@ -151,14 +167,10 @@ export function getUserFavourites(user) {
     )
       .then(response => response.json())
       .then(data => {
-        console.log(
-          'Избранные:',
-          data.result
-        ); /*пока только в консоль выводит*/
         resolve(data.result);
       })
       .catch(function(error) {
-        console.log('Request failed', error);
+        console.warn('Request failed', error);
       });
   });
 }
@@ -180,32 +192,13 @@ export function getUserCreated(user) {
       .then(response => response.json())
       .then(data => {
         window.addressesData = data.result;
-        // console.log('Созданные:', data.result);
         resolve(data.result);
       })
       .catch(function(error) {
-        console.log('Request failed', error);
+        console.warn('Request failed', error);
       });
   });
 }
-
-/*----
-Чтобы создать новый адрес, запускаем:
-getUserInfo(email, password).then((user) => createAddress(user));
-
-Чтобы получить избранные адреса:
-getUserInfo(email, password).then((user) => getUserFavourites(user));
-
-Чтобы получить созданные:
-getUserInfo(email, password).then((user) => getUserCreated(user));
-
-Так можно внести изменения в уже существующий адрес. Соответственно переменные тоже должны откуда-то браться, а пока произвольно задаются
-let container = 7;
-let naviaddress = 703337;
-let newDescription = 'Хорошее начало маршрута для пробежки 10км, но не в такую погоду';
-
-getUserInfo(email, password).then((user) => addInfo(user.token, container, naviaddress, name, newDescription));
-----*/
 
 function deleteAddress(token, container, naviaddress) {
   fetch(
@@ -223,10 +216,11 @@ function deleteAddress(token, container, naviaddress) {
   )
     .then(response => response.json())
     .then(data => {
-      console.log(data.message);
+      //TODO: доделать
+      console.log('deleteAddress: ', data.message);
     })
     .catch(function(error) {
-      console.log('Request failed', error);
+      console.warn('Request failed', error);
     });
 }
 

@@ -1,4 +1,4 @@
-import { getUserCreated, getUserFavourites } from '../../api';
+import { getUserCreated, getUserFavourites } from '../api/api';
 import showSlider from './showSlider';
 
 export const showMyAdresses = userData => {
