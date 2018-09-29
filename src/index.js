@@ -214,6 +214,7 @@ import { createList, loadLists, clearListContainer } from './show-adr';
   searchInput.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       evt.preventDefault();
+      clearListContainer();
       loadLists(findName(addresses, searchInput.value));
     }
   });
