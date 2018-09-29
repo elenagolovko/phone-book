@@ -1,10 +1,10 @@
 // Эти данные нужно будет получать из форм
 // export const email = 'ekaterina.dony@yandex.ru';
 // export const password = '71115317';
-let newLat = 55.775277;
-let newLng = 37.819246;
-let name = 'Старт';
-let description = 'Начало маршрута для пробежки 10км';
+// let newLat = 55.775277;
+// let newLng = 37.819246;
+// let name = 'Старт';
+// let description = 'Начало маршрута для пробежки 10км';
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
 export function getUserInfo(email, password) {
@@ -49,7 +49,7 @@ export function getUserInfo(email, password) {
 }
 
 //Создание адреса
-function createAddress(user) {
+export function createAddress(user, newLat, newLng, name, description) {
   let token = user.token;
   fetch('https://staging-api.naviaddress.com/api/v1.5/addresses', {
     method: 'post',
@@ -69,14 +69,14 @@ function createAddress(user) {
       /*Получаем номер контейнера и адрес и передаем данные дальше, для подтверждения адреса*/
       let container = data.result.container;
       let naviaddress = data.result.naviaddress;
-      acceptAddress(token, container, naviaddress);
+      acceptAddress(token, container, naviaddress, name, description);
     })
     .catch(function(error) {
       console.log('Request failed', error);
     });
 }
 
-function acceptAddress(token, container, naviaddress) {
+function acceptAddress(token, container, naviaddress, name, description) {
   fetch(
     'https://staging-api.naviaddress.com/api/v1.5/addresses/accept/' +
       container +

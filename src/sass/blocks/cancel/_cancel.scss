@@ -1,0 +1,40 @@
+.cancel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 17px;
+  height: 17px;
+  font-size: 0;
+  border: 0;
+  border-radius: 2px;
+  background-color: #f8f7f4;
+  z-index: 10;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 13px;
+    height: 2px;
+    background-color: #000000;
+  }
+
+  &::before {
+    transform: translate(-50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%) rotate(-45deg);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px #e4e434;
+  }
+}
+

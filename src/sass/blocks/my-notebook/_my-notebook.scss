@@ -29,11 +29,11 @@
   &__search-loupe {
     width: fit-content;
 
-    @include centerer(0, 0, (2px, 10px));
+    @include centerer(40px, 40px, (0, 0));
   }
 
   &__search-input, &__selection-parameters {
-    padding: 10px 0 10px 17px;
+    padding: 10px 0 10px 25px;
     border: 1px solid #d3d3d2;
     border-radius: 5px;
     width: 200px;
