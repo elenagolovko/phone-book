@@ -12,6 +12,7 @@ import {
 } from './sort';
 import AdaptiveMenu from './menu';
 import { createList, loadLists, clearListContainer } from './show-adr';
+import { showMyAdresses, showFavorites, cleanSlider } from './js/slider';
 
 ('use strict');
 
@@ -24,6 +25,7 @@ import { createList, loadLists, clearListContainer } from './show-adr';
   let emailInput = loginForm.querySelector('#login-form-email');
   let sortSelect = document.querySelector('.my-notebook__selection-parameters');
   let searchInput = document.getElementById('nav-search');
+  let userData;
   let email, addresses;
 
   function showLoginForm(evt) {
@@ -83,9 +85,10 @@ import { createList, loadLists, clearListContainer } from './show-adr';
       //Убрать со страницы список адресов
       clearListContainer();
 
+      cleanSlider();
+
       //показать приветственный текст
       const welcomeBlock = document.getElementById('js-welcomeBlock');
-      console.log(welcomeBlock);
       welcomeBlock.classList.remove('visually-hidden');
     } else {
       showLoginForm(event);
@@ -148,19 +151,15 @@ import { createList, loadLists, clearListContainer } from './show-adr';
       loginLink.textContent = 'Загрузка данных ...';
 
       getUserInfo(email, password)
-        .then(user => getUserFavourites(user))
-        .then(arr => {
-          loadLists(arr);
-          addresses = arr;
-        })
-        .then(() => {
+        .then(user => {
+          userData = user;
+
           loginLink.textContent = 'Выход';
           modalWindow.classList.add('visually-hidden');
           loginLink.classList.add('js-authorized');
 
           //скрыть приветственный текст
           const welcomeBlock = document.getElementById('js-welcomeBlock');
-          console.log(welcomeBlock);
           welcomeBlock.classList.add('visually-hidden');
 
           const menuLinks = document.querySelectorAll(
@@ -169,6 +168,15 @@ import { createList, loadLists, clearListContainer } from './show-adr';
           for (let i = 0; i < menuLinks.length - 1; i++) {
             menuLinks[i].classList.remove('visually-hidden');
           }
+
+          return getUserFavourites(user);
+        })
+        .then(arr => {
+          loadLists(arr);
+          addresses = arr;
+
+          showFavorites(userData);
+          showMyAdresses(userData);
         });
     }
   });

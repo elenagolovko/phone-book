@@ -1,0 +1,62 @@
+.slider {
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  &__title {
+  }
+
+  &__adress {
+    margin: 10px;
+    padding: 5px;
+    width: $slider-width;
+    height: 250px;
+    background-color: $selected-header-color;
+    transition: opacity 1s;
+    border: 1px solid black;
+  }
+
+  &__name {
+    color: red;
+  }
+
+  &__navi-adress {
+    font-weight: bold;
+  }
+
+  &__point {
+    color: grey;
+  }
+
+  &__description {
+    background-color: azure;
+  }
+
+  &__postal_address {
+  }
+
+  &__date {
+  }
+
+  &__control {
+    position: absolute;
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    font-size: 30px;
+    border: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
