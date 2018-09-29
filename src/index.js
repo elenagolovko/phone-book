@@ -1,10 +1,5 @@
 import './sass/styles.scss';
-import {
-  getUserInfo,
-  getUserCreated,
-  getUserFavourites,
-  createAddress
-} from './api';
+import { getUserInfo, getUserFavourites, createAddress } from './js/api/api';
 import {
   sortByDate,
   sortAbc,
@@ -14,18 +9,16 @@ import {
   findUpcoming,
   findType,
   findName
-} from './sort';
-import AdaptiveMenu from './menu';
-import { createList, loadLists, clearListContainer } from './show-adr';
+} from './js/api/sort';
+import AdaptiveMenu from './js/menu/menu';
+import { loadLists, clearListContainer } from './js/api/show-adr';
 import { showMyAdresses, showFavorites, cleanSlider } from './js/slider';
-import { handleModal, setModal, hideForm } from './modal';
+import { handleModal, setModal, hideForm } from './js/modal/modal';
 import {
   validatePos,
   validateEmail,
-  validatePassword,
-  setErrorState,
-  resetInputState
-} from './validation';
+  validatePassword
+} from './js/modal/validation';
 
 ('use strict');
 
@@ -68,16 +61,6 @@ import {
   setModal('.modal__search', '.search__button');
   setModal('.modal__sort', '.sort__button');
 
-  function validatePassword(value, element) {
-    if (value.length < 6 || value.length > 20) {
-      setErrorState(element);
-      return false;
-    } else {
-      resetInputState(element);
-      return true;
-    }
-  }
-
   loginLink.addEventListener('click', event => {
     if (loginLink.classList.contains('js-authorized')) {
       loginLink.classList.remove('js-authorized');
@@ -94,7 +77,6 @@ import {
       }
       //Убрать со страницы список адресов
       clearListContainer();
-
       cleanSlider();
 
       //показать приветственный текст
@@ -108,30 +90,6 @@ import {
 
   let loginInfo = getLoginInfo();
   let newAddressInfo = getNewAddressInfo();
-
-  //Мне кажется это повторение блока выше :)
-
-  // loginLink.addEventListener('click', evt => {
-  //   if (evt.target.classList.contains('js-authorized')) {
-  //     evt.target.classList.remove('js-authorized');
-
-  //     evt.target.textContent = 'Личный кабинет';
-  //     //Удалить меню для личного кабинета
-  //     const menuLinks = document.querySelectorAll('#js-navigation__list li');
-  //     for (let i = 0; i < menuLinks.length - 1; i++) {
-  //       menuLinks[i].classList.add('visually-hidden');
-  //     }
-  //     //Убрать со страницы список адресов
-  //     clearListContainer();
-
-  //     //показать приветственный текст
-  //     const welcomeBlock = document.getElementById('js-welcomeBlock');
-  //     console.log(welcomeBlock);
-  //     welcomeBlock.classList.remove('visually-hidden');
-  //   } else {
-  //     modalLoginWindow.classList.remove('visually-hidden');
-  //   }
-  // });
 
   loginForm.addEventListener('submit', () => {
     function getUserAddress(email, password) {
@@ -199,7 +157,7 @@ import {
           hideForm(modalCreateWindow);
         }
       });
-    console.log(newAddressInfo);
+    console.log('newAddressInfo: ', newAddressInfo);
   });
 
   searchButton.addEventListener('click', () => {
@@ -259,6 +217,5 @@ import {
     }
   });
 
-  //адаптивное меню
   AdaptiveMenu();
 })();
