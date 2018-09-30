@@ -10,7 +10,8 @@
   &__header {
     position: sticky;
     top: 0;
-    z-index: 10000;
+		z-index: 10000;
+		font-family: $font-serif;
   }
 
   &__navigation {
@@ -22,8 +23,11 @@
     padding-left: 15px;
 		padding-right: 15px;
 		background-color: inherit;
+		font-family: $font-sans-serif;
   }
-
+	&__title {
+		font-family: $font-serif;
+	}
   &__description,
   &__reason {
     margin: 0;
@@ -40,6 +44,7 @@
     color: white;
 		padding: 10px;
 		margin: auto 0 0;
+		font-family: $font-serif;
 
     .footer-text {
       margin: 0;

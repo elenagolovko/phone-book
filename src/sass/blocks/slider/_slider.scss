@@ -22,13 +22,14 @@
     padding: 5px;
     width: $slider-width;
     min-height: 250px; //я убрала фиксированную высоту, а то там длинный текст выпадал из контейнера.
-    background-color: $selected-header-color;
-    transition: opacity 1s;
-    border: 1px solid black;
+		background-color: #D0D8F8;
+		border-radius: 10px;
+		transition: opacity 1s;
+		font-size: 0.9rem;
   }
 
   &__name {
-    color: red;
+    color: #122EA1;
   }
 
   &__navi-adress {
@@ -56,7 +57,7 @@
     height: 40px;
     top: 50%;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(158, 157, 154, 0.3);
     font-weight: bold;
     font-size: 30px;
     border: none;
