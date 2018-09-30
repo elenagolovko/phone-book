@@ -3,7 +3,8 @@ import {
   getUserInfo,
   getUserFavourites,
   getUserCreated,
-  createAddress
+  createAddress,
+  deleteAddress
 } from './js/api/api';
 import {
   sortByDate,
@@ -36,8 +37,9 @@ import {
   let searchInput = document.getElementById('nav-search');
   let modalCreateWindow = document.querySelector('.modal__new-note');
   let createForm = document.querySelector('.new-note__form');
-  let searchButton = document.querySelector('.search__button');
   let sortButton = document.querySelector('.sort__button');
+  let deleteModal = document.querySelector('.modal__delete');
+  let deleteInput = document.getElementById('delete-input');
   let actionButtons = document.querySelectorAll('.action-buttons__button');
   let userData;
   let favoriteAddresses, myAddresses;
@@ -93,6 +95,7 @@ import {
 
   setModalListeners('.modal__search', '.search__button');
   setModalListeners('.modal__sort', '.sort__button');
+  setModalListeners('.modal__delete', '.delete__button');
 
   let loginInfo = getLoginInfo();
   let newAddressInfo = getNewAddressInfo();
@@ -169,18 +172,18 @@ import {
       });
     console.log('newAddressInfo: ', newAddressInfo);
   });
-
-  searchButton.addEventListener('click', () => {
-    //поиск по названию
-    searchInput.addEventListener('keydown', function(evt) {
-      if (evt.keyCode === ENTER_KEYCODE) {
-        evt.preventDefault();
-        // loadLists(findName(addresses, searchInput.value));
-        showFavorites(findName(favoriteAddresses, searchInput.value));
-        showMyAdresses(findName(myAddresses, searchInput.value));
-      }
-    });
-  });
+  // Еще один дубляж
+  // searchButton.addEventListener('click', () => {
+  //   //поиск по названию
+  //   searchInput.addEventListener('keydown', function(evt) {
+  //     if (evt.keyCode === ENTER_KEYCODE) {
+  //       evt.preventDefault();
+  //       // loadLists(findName(addresses, searchInput.value));
+  //       showFavorites(findName(favoriteAddresses, searchInput.value));
+  //       showMyAdresses(findName(myAddresses, searchInput.value));
+  //     }
+  //   });
+  // });
 
   sortButton.addEventListener('click', () => {
     function changeOption() {
@@ -242,6 +245,22 @@ import {
       }
     }
     sortSelect.addEventListener('change', changeOption);
+  });
+
+  deleteInput.addEventListener('keydown', function(evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      evt.preventDefault();
+      let addressesToDelete = findName(myAddresses, deleteInput.value);
+      if (addressesToDelete.length > 0) {
+        getUserInfo(loginInfo.email, loginInfo.password).then(user =>
+          addressesToDelete.forEach(function(address) {
+            deleteAddress(user.token, address.container, address.naviaddress);
+            console.log('Удачно удален адрес: ' + address.name);
+          })
+        );
+        hideForm(deleteModal);
+      }
+    }
   });
 
   searchInput.addEventListener('keydown', function(evt) {

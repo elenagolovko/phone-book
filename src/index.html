@@ -12,7 +12,7 @@
 			<nav class="main__navigation navigation">
 				<ul id="js-navigation__list" class="navigation__list">
 					<li class="navigation__item visually-hidden"><a class="navigation__link link--current" href="#">Записная книжка</a></li>
-					<li class="navigation__item visually-hidden"><a class="navigation__link" href="#">Карта</a></li>
+					<li class="navigation__item visually-hidden"><a class="navigation__link" href="#" title="В разработке">Карта</a></li>
 					<li class="navigation__item"><a class="navigation__link link-login" href="#">Личный кабинет</a></li>
 				</ul>
 				<section class="modal modal-login visually-hidden">
@@ -113,7 +113,14 @@
 						</section>
 					</li>
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
+						<button class="button action-buttons__button delete__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
+						<section class="modal modal__delete visually-hidden">
+							<button type="button" class="modal__cancel cancel">Закрыть</button>
+							<form class="my-notebook__delete modal__form" action="#" method="post">
+								<label class="visually-hidden" for="delete-input">Удалить</label>
+								<input class="my-notebook__delete-input input" id="delete-input" name="delete" placeholder="Введите название / строку в названии">
+							</form>
+						</section>
 					</li>
 				</ul>
 			</section>
