@@ -1,5 +1,10 @@
 import './sass/styles.scss';
-import { getUserInfo, getUserFavourites, createAddress } from './js/api/api';
+import {
+  getUserInfo,
+  getUserFavourites,
+  getUserCreated,
+  createAddress
+} from './js/api/api';
 import {
   sortByDate,
   sortAbc,
@@ -11,9 +16,9 @@ import {
   findName
 } from './js/api/sort';
 import AdaptiveMenu from './js/menu/menu';
-import { loadLists, clearListContainer } from './js/api/show-adr';
-import { showMyAdresses, showFavorites, cleanSlider } from './js/slider';
-import { handleModal, setModal, hideForm } from './js/modal/modal';
+// import { loadLists, clearListContainer } from './js/api/show-adr';
+import { showMyAdresses, showFavorites, cleanSliders } from './js/slider';
+import { handleModal, setModalListeners, hideForm } from './js/modal/modal';
 import {
   validatePos,
   validateEmail,
@@ -35,7 +40,7 @@ import {
   let sortButton = document.querySelector('.sort__button');
   let actionButtons = document.querySelectorAll('.action-buttons__button');
   let userData;
-  let addresses;
+  let favoriteAddresses, myAddresses;
 
   function switchButtonState() {
     let actionButtons = document.querySelectorAll('.action-buttons__button');
@@ -58,38 +63,54 @@ import {
     });
   }
 
-  setModal('.modal__search', '.search__button');
-  setModal('.modal__sort', '.sort__button');
+  function exitNaviBook() {
+    loginLink.classList.remove('js-authorized');
 
-  loginLink.addEventListener('click', event => {
+    for (let i = 0; i < actionButtons.length; i++) {
+      actionButtons[i].classList.add('action-buttons__button--disabled');
+    }
+
+    loginLink.textContent = 'Личный кабинет';
+    //скрыть внутреннее меню для Личного кабинета
+    const menuLinks = document.querySelectorAll('#js-navigation__list li');
+    for (let i = 0; i < menuLinks.length - 1; i++) {
+      menuLinks[i].classList.add('visually-hidden');
+    }
+    //Убрать со страницы список адресов
+    // clearListContainer();
+    cleanSliders();
+
+    //показать приветственный текст
+    const welcomeBlock = document.getElementById('js-welcomeBlock');
+    welcomeBlock.classList.remove('visually-hidden');
+  }
+
+  loginLink.addEventListener('click', () => {
     if (loginLink.classList.contains('js-authorized')) {
-      loginLink.classList.remove('js-authorized');
-
-      for (let i = 0; i < actionButtons.length; i++) {
-        actionButtons[i].classList.add('action-buttons__button--disabled');
-      }
-
-      loginLink.textContent = 'Личный кабинет';
-      //Удалить меню для личного кабинета
-      const menuLinks = document.querySelectorAll('#js-navigation__list li');
-      for (let i = 0; i < menuLinks.length - 1; i++) {
-        menuLinks[i].classList.add('visually-hidden');
-      }
-      //Убрать со страницы список адресов
-      clearListContainer();
-      cleanSlider();
-
-      //показать приветственный текст
-      const welcomeBlock = document.getElementById('js-welcomeBlock');
-      welcomeBlock.classList.remove('visually-hidden');
-    } else {
-      // -------- ?????????  на что это заменилось ????? -----------
-      // showLoginForm(event);
+      exitNaviBook();
     }
   });
 
+  setModalListeners('.modal__search', '.search__button');
+  setModalListeners('.modal__sort', '.sort__button');
+
   let loginInfo = getLoginInfo();
   let newAddressInfo = getNewAddressInfo();
+
+  function openNaviBook() {
+    loginLink.textContent = 'Выход';
+    loginLink.classList.add('js-authorized');
+
+    //скрыть приветственный текст
+    const welcomeBlock = document.getElementById('js-welcomeBlock');
+    welcomeBlock.classList.add('visually-hidden');
+
+    //отобразить внутреннее меню для Личного кабинета
+    const menuLinks = document.querySelectorAll('#js-navigation__list li');
+    for (let i = 0; i < menuLinks.length - 1; i++) {
+      menuLinks[i].classList.remove('visually-hidden');
+    }
+  }
 
   loginForm.addEventListener('submit', () => {
     function getUserAddress(email, password) {
@@ -98,39 +119,28 @@ import {
       getUserInfo(email, password)
         .then(user => {
           userData = user;
-
-          loginLink.textContent = 'Выход';
-          loginLink.classList.add('js-authorized');
-
+          openNaviBook();
           hideForm(modalLoginWindow);
-
-          //скрыть приветственный текст
-          const welcomeBlock = document.getElementById('js-welcomeBlock');
-          welcomeBlock.classList.add('visually-hidden');
-
-          const menuLinks = document.querySelectorAll(
-            '#js-navigation__list li'
-          );
-          for (let i = 0; i < menuLinks.length - 1; i++) {
-            menuLinks[i].classList.remove('visually-hidden');
-          }
 
           return getUserFavourites(user);
         })
         .then(arr => {
-          loadLists(arr);
-          addresses = arr;
+          // loadLists(arr);
+          favoriteAddresses = arr;
+          showFavorites(favoriteAddresses);
 
-          showFavorites(userData);
-          showMyAdresses(userData);
           for (let i = 0; i < actionButtons.length; i++) {
             actionButtons[i].classList.remove(
               'action-buttons__button--disabled'
             );
           }
+          return getUserCreated(userData);
+        })
+        .then(arr => {
+          myAddresses = arr;
+          showMyAdresses(myAddresses);
         });
     }
-
     getLoginInfo();
 
     if (!loginInfo.validity) {
@@ -165,7 +175,9 @@ import {
     searchInput.addEventListener('keydown', function(evt) {
       if (evt.keyCode === ENTER_KEYCODE) {
         evt.preventDefault();
-        loadLists(findName(addresses, searchInput.value));
+        // loadLists(findName(addresses, searchInput.value));
+        showFavorites(findName(favoriteAddresses, searchInput.value));
+        showMyAdresses(findName(myAddresses, searchInput.value));
       }
     });
   });
@@ -175,34 +187,57 @@ import {
       let selectedOption = sortSelect.options[sortSelect.selectedIndex];
       switch (selectedOption.value) {
         case 'all':
-          clearListContainer();
-          loadLists(addresses);
+          // clearListContainer();
+          // loadLists(addresses);
+          cleanSliders();
+          showFavorites(favoriteAddresses);
+          showMyAdresses(myAddresses);
           break;
         case 'alphabet':
-          clearListContainer();
-          loadLists(sortAbc(addresses));
+          // clearListContainer();
+          // loadLists(sortAbc(addresses));
+          cleanSliders();
+          showFavorites(sortAbc(favoriteAddresses));
+          showMyAdresses(sortAbc(myAddresses));
           break;
         case 'addresses':
-          clearListContainer();
-          loadLists(findType(addresses, 'other'));
+          // clearListContainer();
+          // loadLists(findType(addresses, 'other'));
+          cleanSliders();
+          showFavorites(findType(favoriteAddresses, 'other'));
+          showMyAdresses(findType(myAddresses, 'other'));
           break;
         case 'events':
-          clearListContainer();
-          loadLists(findType(addresses, 'event'));
+          // clearListContainer();
+          // loadLists(findType(addresses, 'event'));
+          cleanSliders();
+          showFavorites(findType(favoriteAddresses, 'event'));
+          showMyAdresses(findType(myAddresses, 'event'));
           break;
         case 'date':
-          clearListContainer();
-          loadLists(sortByDate(addresses));
+          // clearListContainer();
+          // loadLists(sortByDate(addresses));
+          cleanSliders();
+          showFavorites(sortByDate(favoriteAddresses));
+          showMyAdresses(sortByDate(myAddresses));
           break;
         case 'nearest':
-          clearListContainer();
+          // clearListContainer();
+          cleanSliders();
           getLocation()
             .then(coords => createRect(coords))
-            .then(rect => loadLists(findNearest(addresses, rect)));
+            .then(rect => {
+              // loadLists(findNearest(addresses, rect));
+              showFavorites(findNearest(favoriteAddresses, rect));
+              showMyAdresses(findNearest(myAddresses, rect));
+            });
           break;
         case 'upcoming':
-          clearListContainer();
-          loadLists(findUpcoming(addresses, 3));
+          // clearListContainer();
+          // loadLists(findUpcoming(addresses, 3));
+          cleanSliders();
+          showFavorites(findUpcoming(favoriteAddresses, 3));
+          showMyAdresses(findUpcoming(myAddresses, 3));
           break;
       }
     }
@@ -212,8 +247,11 @@ import {
   searchInput.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       evt.preventDefault();
-      clearListContainer();
-      loadLists(findName(addresses, searchInput.value));
+      // clearListContainer();
+      // loadLists(findName(addresses, searchInput.value));
+      cleanSliders();
+      showFavorites(findName(favoriteAddresses, searchInput.value));
+      showMyAdresses(findName(myAddresses, searchInput.value));
     }
   });
 

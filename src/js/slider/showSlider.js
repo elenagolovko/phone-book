@@ -1,5 +1,9 @@
 const showSlider = (adresses, idHtml, sliderName, type) => {
-  const numSliders = parseInt(window.innerWidth / 230);
+  const sliderWidth = 230;
+  let numSliders = parseInt(window.innerWidth / sliderWidth);
+  if (adresses.length < numSliders) {
+    numSliders = adresses.length;
+  }
 
   const containerUl = document.createElement('ul');
   containerUl.setAttribute('class', 'slider');
@@ -7,7 +11,6 @@ const showSlider = (adresses, idHtml, sliderName, type) => {
   for (let i = 0; i < numSliders; i++) {
     const containerLi = document.createElement('li');
     containerLi.setAttribute('class', 'slider__adress');
-    containerLi.setAttribute('data-index', i);
     containerUl.appendChild(containerLi);
 
     const name = document.createElement('h3');
@@ -68,40 +71,45 @@ const showSlider = (adresses, idHtml, sliderName, type) => {
   title.setAttribute('class', 'slider__title');
   title.textContent = sliderName + ': ' + adresses.length;
 
-  const buttonLeft = document.createElement('button');
-  buttonLeft.setAttribute(
-    'class',
-    'slider__control control__left ' + 'js-' + type
-  );
-  buttonLeft.textContent = '<';
-
-  const buttonRight = document.createElement('button');
-  buttonRight.setAttribute(
-    'class',
-    'slider__control control__right ' + 'js-' + type
-  );
-  buttonRight.textContent = '>';
-
   const slider = document.getElementById(idHtml);
   slider.innerHTML = '';
   slider.appendChild(title);
   slider.appendChild(containerUl);
-  slider.appendChild(buttonLeft);
-  slider.appendChild(buttonRight);
 
-  const leftBtn = document.querySelector('.control__left.js-' + type);
-  const rightBtn = document.querySelector('.control__right.js-' + type);
+  if (adresses.length > 0) {
+    const buttonLeft = document.createElement('button');
+    buttonLeft.setAttribute(
+      'class',
+      'slider__control control__left ' + 'js-' + type
+    );
+    buttonLeft.textContent = '<';
 
-  leftBtn.addEventListener('click', () => {
-    const temp = adresses.pop();
-    adresses.unshift(temp);
-    showSlider(adresses, idHtml, sliderName, type);
-  });
-  rightBtn.addEventListener('click', () => {
-    const temp = adresses.shift();
-    adresses.push(temp);
-    showSlider(adresses, idHtml, sliderName, type);
-  });
+    const buttonRight = document.createElement('button');
+    buttonRight.setAttribute(
+      'class',
+      'slider__control control__right ' + 'js-' + type
+    );
+    buttonRight.textContent = '>';
+
+    slider.appendChild(buttonLeft);
+    slider.appendChild(buttonRight);
+
+    const leftBtn = document.querySelector('.control__left.js-' + type);
+    const rightBtn = document.querySelector('.control__right.js-' + type);
+
+    leftBtn.addEventListener('click', () => {
+      const temp = adresses.pop();
+      adresses.unshift(temp);
+
+      showSlider(adresses, idHtml, sliderName, type);
+    });
+    rightBtn.addEventListener('click', () => {
+      const temp = adresses.shift();
+      adresses.push(temp);
+
+      showSlider(adresses, idHtml, sliderName, type);
+    });
+  }
 };
 
 export default showSlider;
