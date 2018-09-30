@@ -16,13 +16,15 @@
   }
 
   &__button {
-    @include button(15px, 18px);
+    @include button(15px, 16px);
   }
 
   &__button:focus {
-    box-shadow: 0 0 0 2px #e4e434;
+    box-shadow: 0 0 0 2px #D0D8F8;
   }
-
+	&__button:hover {
+    box-shadow: 2px 2px 5px -1px rgb(170, 173, 184);
+  }
   &__button--disabled {
     background-color: #dddddd;
     box-shadow: none;

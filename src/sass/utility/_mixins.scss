@@ -28,13 +28,15 @@
 @mixin button(
   $padding,
   $font-size,
-  $font-weight: 700,
+  $font-weight: 600,
   $text: uppercase,
-  $background: #ffff99
+	$background: #FFE440	
 ) {
+	font-family: $font-sans-serif;
   padding: $padding;
   font-size: $font-size;
-  border: none;
+	border: none;
+	border-radius: 5px;
   font-weight: $font-weight;
   text-transform: $text;
   background-color: $background;

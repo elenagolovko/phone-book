@@ -3,10 +3,10 @@
   flex-direction: row;
   // flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
+  width: 95%; 
   min-height: 282px;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   list-style-type: none;
 
   &__container {
@@ -21,14 +21,15 @@
     margin: 10px;
     padding: 5px;
     width: $slider-width;
-    height: 250px;
-    background-color: $selected-header-color;
-    transition: opacity 1s;
-    border: 1px solid black;
+    min-height: 250px; //я убрала фиксированную высоту, а то там длинный текст выпадал из контейнера.
+		background-color: #D0D8F8;
+		border-radius: 10px;
+		transition: opacity 1s;
+		font-size: 0.9rem;
   }
 
   &__name {
-    color: red;
+    color: #122EA1;
   }
 
   &__navi-adress {
@@ -52,11 +53,11 @@
   &__control {
     position: absolute;
     border-radius: 25px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     top: 50%;
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(158, 157, 154, 0.3);
     font-weight: bold;
     font-size: 30px;
     border: none;
