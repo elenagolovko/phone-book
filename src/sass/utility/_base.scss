@@ -5,7 +5,10 @@ body {
 }
 
 .container {
-  max-width: $max-width;
+	max-width: $max-width;
+	display: flex; 
+	flex-direction: column;
+	height: 100%; 
   margin: 0 auto;
   background-color: white;
 }
