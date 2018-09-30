@@ -11,7 +11,7 @@ export function hideForm(modalWindow) {
   }
 }
 
-export function setModal(modalSelector, openSelector) {
+export function setModalListeners(modalSelector, openSelector) {
   let ENTER_KEYCODE = 13;
   let ESC__KEYCODE = 27;
   let modalWindow = document.querySelector(modalSelector);
@@ -49,7 +49,7 @@ export function handleModal(modalSelector, openSelector, validators) {
   let form = modalWindow.querySelector('.modal__form');
   let result = {};
 
-  setModal(modalSelector, openSelector);
+  setModalListeners(modalSelector, openSelector);
 
   form.addEventListener('submit', evt => {
     evt.preventDefault();
