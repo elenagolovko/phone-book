@@ -49,9 +49,9 @@
 			<h2 class="main__title">Добро пожаловать в NaviBook</h2>
 			<section id="js-welcomeBlock" class="main__info">
 				<h2 class="visually-hidden">Описание</h2>
-				<p class="main__description">Приложение для сохранения важной информации о ваших друзьях, коллегах, гостях.</p>
-				<p class="main__reason">Кому пригодится: людям с широким кругом общения, профессионалам в сфере услуг и просто тем, кто хочет помнить важную информацию
-					всегда.</p>
+				<p class="main__description">Приложение для комфортной работы с Вашими navi-адресами. Создавайте адреса. Просматривайте избранные адреса и события. Легко находите то, что нужно.</p>
+				<p class="main__reason">Удобный способ хранения навиадресов, организации и доступа к ним создает новые возможности, как для бизнеса, так и для личных целей.</p>
+				<p>Попробуйте!</p>
 				<a href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Зарегистрироваться можно здесь</a>
 			</section>
 			<section class="action-buttons main__action-buttons">
@@ -118,8 +118,14 @@
 							<button type="button" class="modal__cancel cancel">Закрыть</button>
 							<form class="my-notebook__delete modal__form" action="#" method="post">
 								<label class="visually-hidden" for="delete-input">Удалить</label>
-								<input class="my-notebook__delete-input input" id="delete-input" name="delete" placeholder="Введите название / строку в названии">
+								<input class="my-notebook__delete-input input modal__input" id="delete-input" name="delete" placeholder="Введите название / строку в названии">
 							</form>
+						</section>
+						<section class="modal modal__delete-confirmation visually-hidden">
+							<p>Вы абсолютно точно уверены что хотите удалить эти адреса?</p><br>
+							<span id="addressesToDelete"></span><br>
+							<button class="modal__button cancel-delete">Нет, нет, назад!</button>
+							<button class="modal__button confirm-delete">Да, уверен</button>
 						</section>
 					</li>
 				</ul>

@@ -86,4 +86,9 @@
   &__button:focus {
     box-shadow: 0 0 0 2px #e4e434;
   }
+
+  &__delete, &__delete-confirmation {
+    right: 5%;
+  }
+
 }

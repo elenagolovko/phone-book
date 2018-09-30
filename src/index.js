@@ -115,35 +115,33 @@ import {
     }
   }
 
+  function getUserAddress(email, password) {
+    loginLink.textContent = 'Загрузка данных ...';
+
+    getUserInfo(email, password)
+      .then(user => {
+        userData = user;
+        openNaviBook();
+        hideForm(modalLoginWindow);
+
+        return getUserFavourites(user);
+      })
+      .then(arr => {
+        favoriteAddresses = arr;
+        showFavorites(favoriteAddresses);
+
+        for (let i = 0; i < actionButtons.length; i++) {
+          actionButtons[i].classList.remove('action-buttons__button--disabled');
+        }
+        return getUserCreated(userData);
+      })
+      .then(arr => {
+        myAddresses = arr;
+        showMyAdresses(myAddresses);
+      });
+  }
+
   loginForm.addEventListener('submit', () => {
-    function getUserAddress(email, password) {
-      loginLink.textContent = 'Загрузка данных ...';
-
-      getUserInfo(email, password)
-        .then(user => {
-          userData = user;
-          openNaviBook();
-          hideForm(modalLoginWindow);
-
-          return getUserFavourites(user);
-        })
-        .then(arr => {
-          // loadLists(arr);
-          favoriteAddresses = arr;
-          showFavorites(favoriteAddresses);
-
-          for (let i = 0; i < actionButtons.length; i++) {
-            actionButtons[i].classList.remove(
-              'action-buttons__button--disabled'
-            );
-          }
-          return getUserCreated(userData);
-        })
-        .then(arr => {
-          myAddresses = arr;
-          showMyAdresses(myAddresses);
-        });
-    }
     getLoginInfo();
 
     if (!loginInfo.validity) {
@@ -169,75 +167,54 @@ import {
         if (newAddressInfo.validity) {
           hideForm(modalCreateWindow);
         }
+        getUserAddress(loginInfo.email, loginInfo.password);
+        cleanSliders();
+        console.log(myAddresses);
+        showFavorites(favoriteAddresses);
+        showMyAdresses(myAddresses);
       });
     console.log('newAddressInfo: ', newAddressInfo);
   });
-  // Еще один дубляж
-  // searchButton.addEventListener('click', () => {
-  //   //поиск по названию
-  //   searchInput.addEventListener('keydown', function(evt) {
-  //     if (evt.keyCode === ENTER_KEYCODE) {
-  //       evt.preventDefault();
-  //       // loadLists(findName(addresses, searchInput.value));
-  //       showFavorites(findName(favoriteAddresses, searchInput.value));
-  //       showMyAdresses(findName(myAddresses, searchInput.value));
-  //     }
-  //   });
-  // });
 
   sortButton.addEventListener('click', () => {
     function changeOption() {
       let selectedOption = sortSelect.options[sortSelect.selectedIndex];
       switch (selectedOption.value) {
         case 'all':
-          // clearListContainer();
-          // loadLists(addresses);
           cleanSliders();
           showFavorites(favoriteAddresses);
           showMyAdresses(myAddresses);
           break;
         case 'alphabet':
-          // clearListContainer();
-          // loadLists(sortAbc(addresses));
           cleanSliders();
           showFavorites(sortAbc(favoriteAddresses));
           showMyAdresses(sortAbc(myAddresses));
           break;
         case 'addresses':
-          // clearListContainer();
-          // loadLists(findType(addresses, 'other'));
           cleanSliders();
           showFavorites(findType(favoriteAddresses, 'other'));
           showMyAdresses(findType(myAddresses, 'other'));
           break;
         case 'events':
-          // clearListContainer();
-          // loadLists(findType(addresses, 'event'));
           cleanSliders();
           showFavorites(findType(favoriteAddresses, 'event'));
           showMyAdresses(findType(myAddresses, 'event'));
           break;
         case 'date':
-          // clearListContainer();
-          // loadLists(sortByDate(addresses));
           cleanSliders();
           showFavorites(sortByDate(favoriteAddresses));
           showMyAdresses(sortByDate(myAddresses));
           break;
         case 'nearest':
-          // clearListContainer();
           cleanSliders();
           getLocation()
             .then(coords => createRect(coords))
             .then(rect => {
-              // loadLists(findNearest(addresses, rect));
               showFavorites(findNearest(favoriteAddresses, rect));
               showMyAdresses(findNearest(myAddresses, rect));
             });
           break;
         case 'upcoming':
-          // clearListContainer();
-          // loadLists(findUpcoming(addresses, 3));
           cleanSliders();
           showFavorites(findUpcoming(favoriteAddresses, 3));
           showMyAdresses(findUpcoming(myAddresses, 3));
@@ -252,13 +229,36 @@ import {
       evt.preventDefault();
       let addressesToDelete = findName(myAddresses, deleteInput.value);
       if (addressesToDelete.length > 0) {
-        getUserInfo(loginInfo.email, loginInfo.password).then(user =>
-          addressesToDelete.forEach(function(address) {
-            deleteAddress(user.token, address.container, address.naviaddress);
-            console.log('Удачно удален адрес: ' + address.name);
-          })
+        let modalConfirmation = document.querySelector(
+          '.modal__delete-confirmation'
         );
-        hideForm(deleteModal);
+        let deleteList = document.getElementById('addressesToDelete');
+        let addressesNames = [];
+        addressesToDelete.forEach(function(address) {
+          addressesNames.push(address.name);
+        });
+        deleteList.textContent = addressesNames;
+        modalConfirmation.classList.remove('visually-hidden');
+        let cancelDelete = modalConfirmation.querySelector('.cancel-delete');
+        let confirmDelete = modalConfirmation.querySelector('.confirm-delete');
+        cancelDelete.addEventListener('click', () => {
+          modalConfirmation.classList.add('visually-hidden');
+          return;
+        });
+        confirmDelete.addEventListener('click', () => {
+          getUserInfo(loginInfo.email, loginInfo.password).then(user =>
+            addressesToDelete.forEach(function(address) {
+              deleteAddress(user.token, address.container, address.naviaddress);
+              console.log('Удачно удален адрес: ' + address.name);
+            })
+          );
+          modalConfirmation.classList.add('visually-hidden');
+          deleteModal.classList.add('visually-hidden');
+          getUserAddress(loginInfo.email, loginInfo.password);
+          cleanSliders();
+          showFavorites(favoriteAddresses);
+          showMyAdresses(myAddresses);
+        });
       }
     }
   });
