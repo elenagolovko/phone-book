@@ -200,7 +200,7 @@ export function getUserCreated(user) {
   });
 }
 
-function deleteAddress(token, container, naviaddress) {
+export function deleteAddress(token, container, naviaddress) {
   fetch(
     'https://staging-api.naviaddress.com/api/v1.5/Addresses/' +
       container +

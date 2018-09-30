@@ -17,6 +17,9 @@ export function findType(arr, type) {
 //поиск по названию/слову в названии
 export function findName(arr, str) {
   return arr.filter(n => {
+    if (!n.name) {
+      return false;
+    }
     let words = n.name.toLowerCase().split(' '); //делим название на массив из слов
     for (let i of words) {
       let pattern = str.length > 3 ? str.slice(0, -2) : str; //формируем паттерн для поиска (убираем у слова окончание, чтобы падеж и число не влияли на результат. Но если слово короткое, то оно, скорее всего, и так без окончания, так что его берем целиком)

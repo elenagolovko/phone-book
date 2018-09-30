@@ -113,7 +113,14 @@
 						</section>
 					</li>
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
+						<button class="button action-buttons__button delete__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
+						<section class="modal modal__delete visually-hidden">
+							<button type="button" class="modal__cancel cancel">Закрыть</button>
+							<form class="my-notebook__delete modal__form" action="#" method="post">
+								<label class="visually-hidden" for="delete-input">Удалить</label>
+								<input class="my-notebook__delete-input input" id="delete-input" name="delete" placeholder="Введите название / строку в названии">
+							</form>
+						</section>
 					</li>
 				</ul>
 			</section>
