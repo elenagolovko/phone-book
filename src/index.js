@@ -44,14 +44,6 @@ import {
   let userData;
   let favoriteAddresses, myAddresses;
 
-  function switchButtonState() {
-    let actionButtons = document.querySelectorAll('.action-buttons__button');
-
-    for (let i = 0; i < actionButtons.length; i++) {
-      actionButtons[i].classList.remove('action-buttons__button--disabled');
-    }
-  }
-
   function getLoginInfo() {
     return handleModal('.modal-login', '.link-login', {
       validateEmail,
@@ -128,6 +120,7 @@ import {
       })
       .then(arr => {
         favoriteAddresses = arr;
+        cleanSliders();
         showFavorites(favoriteAddresses);
 
         for (let i = 0; i < actionButtons.length; i++) {
@@ -137,6 +130,7 @@ import {
       })
       .then(arr => {
         myAddresses = arr;
+        console.log(myAddresses);
         showMyAdresses(myAddresses);
       });
   }
@@ -168,10 +162,6 @@ import {
           hideForm(modalCreateWindow);
         }
         getUserAddress(loginInfo.email, loginInfo.password);
-        cleanSliders();
-        console.log(myAddresses);
-        showFavorites(favoriteAddresses);
-        showMyAdresses(myAddresses);
       });
     console.log('newAddressInfo: ', newAddressInfo);
   });
@@ -255,9 +245,6 @@ import {
           modalConfirmation.classList.add('visually-hidden');
           deleteModal.classList.add('visually-hidden');
           getUserAddress(loginInfo.email, loginInfo.password);
-          cleanSliders();
-          showFavorites(favoriteAddresses);
-          showMyAdresses(myAddresses);
         });
       }
     }
