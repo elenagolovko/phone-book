@@ -13,5 +13,5 @@ A command project for NaviHack hackathon
 Using: BEM, Webpack, Sass and Vanila JS.
 
 - Naviaddress для разработчиков: [developer.naviaddress.com](https://developer.naviaddress.com/)
-- API \(https://staging-api.naviaddress.com/\): [swagger.naviaddress.com](https://swagger.naviaddress.com/swagger/)
+- API \(`https://staging-api.naviaddress.com/`\): [swagger.naviaddress.com](https://swagger.naviaddress.com/swagger/)
 - Регистрироваться здесь: [staging.naviaddress.com/map](https://staging.naviaddress.com/map)
