@@ -1,10 +1,17 @@
 # NaviBook
+
 A command project for NaviHack hackathon
 
-Navibook - приложения для сохранения важной информации о друзьях и близких.
+**Navibook** - приложение для сохранения важной информации о друзьях и близких.
 
-Using BEM, Webpack, Sass and Vanila JS. Основной функционал доступен.
+Наш проект является основой для удобного личного использования navi-адресов. Мы предлагаем записную книжку из navi-адресов с современными способами упорядочивания данных.
 
-Наш проект является основой для удобного личного  использования navi-адресов. Эта аналог старой бумажной записной книжки с сортировкой по алфавиту и многим другим параметрам. Мы предлагаем записную книжку из navi-адресов с современными способами упорядочивания данных.
+Нашу работу можно посмотреть здесь: [navibook.space](https://navibook.space) (Основной функционал доступен.)
 
-Нашу работу совсем скоро можно будет посмотреть здесь: [navibook.space](https://navibook.space "navibook.space")
+---
+
+Using: BEM, Webpack, Sass and Vanila JS.
+
+- Naviaddress для разработчиков: [developer.naviaddress.com](https://developer.naviaddress.com/)
+- API \(`https://staging-api.naviaddress.com/`\): [swagger.naviaddress.com](https://swagger.naviaddress.com/swagger/)
+- Регистрироваться здесь: [staging.naviaddress.com/map](https://staging.naviaddress.com/map)
