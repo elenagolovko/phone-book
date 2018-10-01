@@ -11,28 +11,40 @@
 		<header class="main__header">
 			<nav class="main__navigation navigation">
 				<ul id="js-navigation__list" class="navigation__list">
-					<li class="navigation__item visually-hidden"><a class="navigation__link link--current" href="#">Записная книжка</a></li>
-					<li class="navigation__item visually-hidden"><a class="navigation__link" href="#" title="В разработке">Карта</a></li>
-					<li class="navigation__item"><a class="navigation__link link-login" href="#">Личный кабинет</a></li>
+					<li class="navigation__item visually-hidden"><a class="navigation__link link--current"
+						 href="#">Записная книжка</a></li>
+					<li class="navigation__item visually-hidden"><a class="navigation__link"
+						 href="#" title="В разработке">Карта</a></li>
+					<li class="navigation__item"><a class="navigation__link link-login" href="#">Личный
+							кабинет</a></li>
 				</ul>
 				<section class="modal modal-login visually-hidden">
 					<h2 class="visually-hidden">Форма входа</h2>
 					<button type="button" class="modal__cancel cancel">Закрыть</button>
-					<form class="modal__login-form modal__form" action="#" method="post" novalidate>
-						<label class="visually-hidden" for="login-form-email">Ваша электронная почта</label>
-						<input class="modal__input login-input" type="email" name="email" id="login-form-email" placeholder="Электронная почта" required>
-						<span class="modal__error-message error-message visually-hidden">Некорректный email. Email должен содержать "@"</span>
+					<form class="modal__login-form modal__form" action="#" method="post"
+					 novalidate>
+						<label class="visually-hidden" for="login-form-email">Ваша электронная
+							почта</label>
+						<input class="modal__input login-input" type="email" name="email" id="login-form-email"
+						 placeholder="Электронная почта" required>
+						<span class="modal__error-message error-message visually-hidden">Некорректный
+							email. Email должен содержать "@"</span>
 						<label class="visually-hidden" for="login-form-password">Ваш пароль</label>
-						<input class="modal__input login-input" type="password" name="password" id="login-form-password" placeholder="Пароль" required>
-						<span class="modal__error-message error-message visually-hidden">Длина пароля должна составлять от 6 до 20 символов.</span>
-						<span id="js-errLogin" class="modal__error-message error-message visually-hidden">Неправильный логин или пароль</span>
+						<input class="modal__input login-input" type="password" name="password"
+						 id="login-form-password" placeholder="Пароль" required>
+						<span class="modal__error-message error-message visually-hidden">Длина
+							пароля должна составлять от 6 до 20 символов.</span>
+						<span id="js-errLogin" class="modal__error-message error-message visually-hidden">Неправильный
+							логин или пароль</span>
 						<button class="modal__button" type="submit">Войти</button>
 						<div class="modal__help modal-help">
 							<p class="modal-help__text">
-								<a class="modal-help__link" href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Забыли пароль?</a>
+								<a class="modal-help__link" href="https://staging.naviaddress.com/map"
+								 target="_blank" rel="noopener noreferrer">Забыли пароль?</a>
 							</p>
 							<p class="modal-help__text">
-								<a class="modal-help__link" href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Новая регистрация</a>
+								<a class="modal-help__link" href="https://staging.naviaddress.com/map"
+								 target="_blank" rel="noopener noreferrer">Новая регистрация</a>
 							</p>
 						</div>
 					</form>
@@ -49,56 +61,78 @@
 			<h2 class="main__title">Добро пожаловать в NaviBook</h2>
 			<section id="js-welcomeBlock" class="main__info">
 				<h2 class="visually-hidden">Описание</h2>
-				<p class="main__description">Приложение для комфортной работы с Вашими navi-адресами. Создавайте адреса. Просматривайте избранные адреса и события. Легко находите то, что нужно.</p>
-				<p class="main__reason">Удобный способ хранения навиадресов, организации и доступа к ним создает новые возможности, как для бизнеса, так и для личных целей.</p>
+				<p class="main__description">Приложение для комфортной работы с Вашими
+					navi-адресами. Создавайте адреса. Просматривайте избранные адреса и
+					события. Легко находите то, что нужно.</p>
+				<p class="main__reason">Удобный способ хранения навиадресов, организации и
+					доступа к ним создает новые возможности, как для бизнеса, так и для личных
+					целей.</p>
 				<p>Попробуйте!</p>
-				<a href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Зарегистрироваться можно здесь</a>
+				<a href="https://staging.naviaddress.com/map" target="_blank" rel="noopener noreferrer">Зарегистрироваться
+					можно здесь</a>
 			</section>
 			<section class="action-buttons main__action-buttons">
 				<h2 class="action-buttons__title visually-hidden">Действия с навиадресом</h2>
 				<ul class="action-buttons__list action">
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button create__button action-buttons__button--disabled" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!" type="button">Создать Навиадрес</button>
+						<button class="button action-buttons__button create__button action-buttons__button--disabled"
+						 data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!"
+						 type="button">Создать Навиадрес</button>
 						<section class="modal modal__new-note visually-hidden" id="new-note">
 							<h2 class="visually-hidden">Создание нового навиадреса</h2>
-							<p class="new-note__description">Чтобы создать навиадрес заполни, пожалуйста, форму</p>
+							<p class="new-note__description">Чтобы создать навиадрес заполни,
+								пожалуйста, форму</p>
 							<button type="button" class="modal__cancel cancel">Закрыть</button>
 							<form class="new-note__form modal__form" action="#" method="post">
 								<label class="new-note__label visually-hidden" for="newLat">Широта</label>
-								<input id="newLat" name="newLat" class="new-note__input modal__input" type="text" placeholder="Широта">
-								<span class="modal__error-message error-message visually-hidden">Некорректное значение</span>
+								<input id="newLat" name="newLat" class="new-note__input modal__input"
+								 type="text" placeholder="Широта">
+								<span class="modal__error-message error-message visually-hidden">Некорректное
+									значение</span>
 								<label class="new-note__label visually-hidden" for="newLng">Долгота</label>
-								<input id="newLng" name="newLng" class="new-note__input modal__input" type="text" placeholder="Долгота">
-								<span class="modal__error-message error-message visually-hidden">Некорректное значение</span>
-								<label class="new-note__label visually-hidden" for="name" >Название</label>
-								<input id="name" name ="name" class="new-note__input modal__input" type="text" placeholder="Название">
+								<input id="newLng" name="newLng" class="new-note__input modal__input"
+								 type="text" placeholder="Долгота">
+								<span class="modal__error-message error-message visually-hidden">Некорректное
+									значение</span>
+								<label class="new-note__label visually-hidden" for="name">Название</label>
+								<input id="name" name="name" class="new-note__input modal__input" type="text"
+								 placeholder="Название">
 								<label class="new-note__label visually-hidden" for="description">Описание</label>
-								<input id="description" name="description" class="new-note__input modal__input" type="text" placeholder="Описание">
+								<input id="description" name="description" class="new-note__input modal__input"
+								 type="text" placeholder="Описание">
 								<button class="new-note__button button" type="submit">Добавить</button>
 							</form>
 						</section>
 					</li>
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button search__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Найти Навиадрес</button>
+						<button class="button action-buttons__button search__button action-buttons__button--disabled"
+						 type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Найти
+							Навиадрес</button>
 						<section class="modal modal__search visually-hidden">
 							<button type="button" class="modal__cancel cancel">Закрыть</button>
 							<form class="my-notebook__search modal__form" action="#" method="post">
 								<label class="visually-hidden" for="nav-search">Поиск</label>
-								<input class="my-notebook__search-input input" type="search" id="nav-search" name="search" placeholder="Что ищем?">
+								<input class="my-notebook__search-input input" type="search" id="nav-search"
+								 name="search" placeholder="Что ищем?">
 							</form>
 							<div class="my-notebook__search-loupe">
-								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="17" viewBox="0 0 17 17"><path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z"/></svg>
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+								 width="17" height="17" viewBox="0 0 17 17">
+									<path fill="#999999" d="M16.958 15.527L11.75 10.32A6.455 6.455 0 0 0 13 6.5 6.5 6.5 0 1 0 6.5 13a6.465 6.465 0 0 0 3.839-1.263l5.205 5.204 1.414-1.414zM6.5 11C4.019 11 2 8.981 2 6.5S4.019 2 6.5 2 11 4.019 11 6.5 8.981 11 6.5 11z" /></svg>
 							</div>
 						</section>
 					</li>
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button sort__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Сортировать Навиадреса</button>
+						<button class="button action-buttons__button sort__button action-buttons__button--disabled"
+						 type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Сортировать
+							Навиадреса</button>
 						<section class="modal modal__sort visually-hidden">
 							<button type="button" class="modal__cancel cancel">Закрыть</button>
 							<form class="my-notebook__filter modal__form" action="#" method="post">
 								<fieldset class="my-notebook__select-list">
 									<legend class="visually-hidden">Сортировка:</legend>
-									<label class="visually-hidden" for="selection-parameters">Параметры сортировки</label>
+									<label class="visually-hidden" for="selection-parameters">Параметры
+										сортировки</label>
 									<select class="my-notebook__selection-parameters" id="selection-parameters">
 										<option value="all">все</option>
 										<option value="alphabet">по алфавиту</option>
@@ -113,12 +147,15 @@
 						</section>
 					</li>
 					<li class="action-buttons__item">
-						<button class="button action-buttons__button delete__button action-buttons__button--disabled" type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить Навиадрес</button>
+						<button class="button action-buttons__button delete__button action-buttons__button--disabled"
+						 type="button" data-tooltip="Чтобы активировать функцию необходимо войти в личный кабинет!">Удалить
+							Навиадрес</button>
 						<section class="modal modal__delete visually-hidden">
 							<button type="button" class="modal__cancel cancel">Закрыть</button>
 							<form class="my-notebook__delete modal__form" action="#" method="post">
 								<label class="visually-hidden" for="delete-input">Удалить</label>
-								<input class="my-notebook__delete-input input modal__input" id="delete-input" name="delete" placeholder="Введите название / строку в названии">
+								<input class="my-notebook__delete-input input modal__input" id="delete-input"
+								 name="delete" placeholder="Введите название / строку в названии">
 							</form>
 						</section>
 						<section class="modal modal__delete-confirmation visually-hidden">
@@ -139,7 +176,7 @@
 			</section>
 		</main>
 		<footer class="main__footer">
-			<p class="footer-text">&#169; 2018 JuniorPower</p>
+			<p class="footer-text">Copyright &#169; 2018 JuniorPower</p>
 		</footer>
 	</div>
 </body>
