@@ -1,19 +1,33 @@
 {
-  "name": "app",
+  "name": "navibook",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.html",
+  "description": "NaviBook",
+  "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
     "watch": "npm run dev -- --watch"
   },
+  "homepage": "https://github.com/elenagolovko/phone-book",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/elenagolovko/phone-book.git"
+  },
   "keywords": [
-    ""
+    "navibook",
+    "naviaddress"
   ],
-  "author": "",
+  "author": "JuniorPower",
+  "contributors": [
+    "Elena Golovko <airdragon220@gmail.com>",
+    "Ekaterina Doniy <madbobcate@gmail.com>",
+    "Anna Ignatenkova <anna.a.ignatenkova@yandex.ru> (https://annaweb.space/)"
+  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elenagolovko/phone-book/issues"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.1.0",
     "autoprefixer": "^9.1.5",
@@ -47,8 +61,5 @@
     "webpack": "^4.10.1",
     "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.4"
-  },
-  "dependencies": {
-    "nvm": "0.0.4"
   }
 }
