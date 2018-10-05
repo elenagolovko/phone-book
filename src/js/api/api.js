@@ -201,6 +201,11 @@ export function getUserCreated(user) {
 }
 
 export function deleteAddress(token, container, naviaddress) {
+  //замена символа # на %23 в event
+  if (naviaddress[0].toString() === '#') {
+    naviaddress = '%23'.concat(naviaddress.substring(1));
+  }
+  console.log('deleting naviaddress', '[' + container + ']' + naviaddress);
   fetch(
     'https://staging-api.naviaddress.com/api/v1.5/Addresses/' +
       container +
