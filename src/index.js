@@ -225,7 +225,14 @@ import {
         let deleteList = document.getElementById('addressesToDelete');
         let addressesNames = [];
         addressesToDelete.forEach(function(address) {
-          addressesNames.push(address.name);
+          addressesNames.push(
+            '[' +
+              address.container +
+              ']' +
+              address.naviaddress +
+              ' ' +
+              address.name
+          );
         });
         deleteList.textContent = addressesNames;
         modalConfirmation.classList.remove('visually-hidden');
@@ -236,12 +243,14 @@ import {
           return;
         });
         confirmDelete.addEventListener('click', () => {
-          getUserInfo(loginInfo.email, loginInfo.password).then(user =>
+          getUserInfo(loginInfo.email, loginInfo.password).then(user => {
             addressesToDelete.forEach(function(address) {
               deleteAddress(user.token, address.container, address.naviaddress);
-              console.log('Удачно удален адрес: ' + address.name);
-            })
-          );
+              console.log('Удачно удален адрес: ' + address);
+            });
+            //очистить массив с удаляемыми адресами
+            addressesToDelete.length = 0;
+          });
           modalConfirmation.classList.add('visually-hidden');
           deleteModal.classList.add('visually-hidden');
           getUserAddress(loginInfo.email, loginInfo.password);
