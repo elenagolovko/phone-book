@@ -16,11 +16,12 @@ let newDescription = 'Хорошее начало маршрута для про
 
 getUserInfo(email, password).then((user) => addInfo(user.token, container, naviaddress, name, newDescription));
 ----*/
+const apiURL = 'https://staging-api.naviaddress.com/api/v1.5/';
 
 //Получение токена и user-id (id нужен для получения адресов юзера, а токен - вообще для всего)
 export function getUserInfo(email, password) {
   return new Promise(function(resolve) {
-    fetch('https://staging-api.naviaddress.com/api/v1.5/sessions', {
+    fetch(apiURL + 'sessions', {
       method: 'post',
       headers: {
         'Content-type': 'application/json'
@@ -67,7 +68,7 @@ export function getUserInfo(email, password) {
 //Создание адреса
 export function createAddress(user, newLat, newLng, name, description) {
   let token = user.token;
-  fetch('https://staging-api.naviaddress.com/api/v1.5/addresses', {
+  fetch(apiURL + 'addresses', {
     method: 'post',
     headers: {
       'content-type': 'application/json',
@@ -93,23 +94,17 @@ export function createAddress(user, newLat, newLng, name, description) {
 }
 
 function acceptAddress(token, container, naviaddress, name, description) {
-  fetch(
-    'https://staging-api.naviaddress.com/api/v1.5/addresses/accept/' +
-      container +
-      '/' +
-      naviaddress,
-    {
-      method: 'post',
-      headers: {
-        'content-type': 'application/json',
-        'auth-token': token
-      },
-      body: JSON.stringify({
-        container: container,
-        naviaddress: naviaddress
-      })
-    }
-  )
+  fetch(apiURL + 'addresses/accept/' + container + '/' + naviaddress, {
+    method: 'post',
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': token
+    },
+    body: JSON.stringify({
+      container: container,
+      naviaddress: naviaddress
+    })
+  })
     .then(() => {
       addInfo(token, container, naviaddress, name, description);
     })
@@ -119,28 +114,22 @@ function acceptAddress(token, container, naviaddress, name, description) {
 }
 
 function addInfo(token, container, naviaddress, name, description) {
-  fetch(
-    ' https://staging-api.naviaddress.com/api/v1.5/addresses/' +
-      container +
-      '/' +
-      naviaddress,
-    {
-      method: 'put',
-      headers: {
-        'content-type': 'application/json',
-        'auth-token': token
-      },
-      body: JSON.stringify({
-        lang: 'ru',
-        name: name,
-        description: description,
-        map_visibility: 'true'
-      })
-      /*В body может быть много параметром, обязательные - это lang и name,
+  fetch(apiURL + 'addresses/' + container + '/' + naviaddress, {
+    method: 'put',
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': token
+    },
+    body: JSON.stringify({
+      lang: 'ru',
+      name: name,
+      description: description,
+      map_visibility: 'true'
+    })
+    /*В body может быть много параметром, обязательные - это lang и name,
       остальные я просто для примера добавила. Надо еще доработать,
       чтоб функция могла любую инфу, которую юзер заполнил, добавлять*/
-    }
-  )
+  })
     .then(response => response.json())
     .then(data => {
       //TODO: доделать
@@ -154,17 +143,13 @@ function addInfo(token, container, naviaddress, name, description) {
 //Получения избранных адресов
 export function getUserFavourites(user) {
   return new Promise(function(resolve) {
-    fetch(
-      'https://staging-api.naviaddress.com/api/v1.5/Addresses/favorites?UserId=' +
-        user.id,
-      {
-        method: 'get',
-        headers: {
-          'content-type': 'application/json',
-          'auth-token': user.token
-        }
+    fetch(apiURL + 'Addresses/favorites?UserId=' + user.id, {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json',
+        'auth-token': user.token
       }
-    )
+    })
       .then(response => response.json())
       .then(data => {
         resolve(data.result);
@@ -178,17 +163,13 @@ export function getUserFavourites(user) {
 //Получение адресов, созданных юзером
 export function getUserCreated(user) {
   return new Promise(function(resolve) {
-    fetch(
-      'https://staging-api.naviaddress.com/api/v1.5/Addresses/my?UserId=' +
-        user.id,
-      {
-        method: 'get',
-        headers: {
-          'content-type': 'application/json',
-          'auth-token': user.token
-        }
+    fetch(apiURL + 'Addresses/my?UserId=' + user.id, {
+      method: 'get',
+      headers: {
+        'content-type': 'application/json',
+        'auth-token': user.token
       }
-    )
+    })
       .then(response => response.json())
       .then(data => {
         window.addressesData = data.result;
@@ -206,19 +187,13 @@ export function deleteAddress(token, container, naviaddress) {
     naviaddress = '%23'.concat(naviaddress.substring(1));
   }
   console.log('deleting naviaddress', '[' + container + ']' + naviaddress);
-  fetch(
-    'https://staging-api.naviaddress.com/api/v1.5/Addresses/' +
-      container +
-      '/' +
-      naviaddress,
-    {
-      method: 'delete',
-      headers: {
-        'content-type': 'application/json',
-        'auth-token': token
-      }
+  fetch(apiURL + 'Addresses/' + container + '/' + naviaddress, {
+    method: 'delete',
+    headers: {
+      'content-type': 'application/json',
+      'auth-token': token
     }
-  )
+  })
     .then(response => response.json())
     .then(data => {
       //TODO: доделать
