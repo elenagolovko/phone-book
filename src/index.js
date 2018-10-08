@@ -1,11 +1,11 @@
 import './sass/styles.scss';
 import {
-  getUserInfo,
-  getUserFavourites,
-  getUserCreated,
-  createAddress,
-  deleteAddress
-} from './js/api/api';
+  sessionCreate,
+  naviCreate,
+  naviDelete,
+  naviGetOwn,
+  naviGetFavorites
+} from './js/api/index';
 import {
   sortByDate,
   sortAbc,
@@ -15,9 +15,9 @@ import {
   findUpcoming,
   findType,
   findName
-} from './js/api/sort';
+} from './js/sort/sort';
 import AdaptiveMenu from './js/menu/menu';
-// import { loadLists, clearListContainer } from './js/api/show-adr';
+// import { loadLists, clearListContainer } from './js/sort/show-adr';
 import { showMyAdresses, showFavorites, cleanSliders } from './js/slider';
 import { handleModal, setModalListeners, hideForm } from './js/modal/modal';
 import {
@@ -110,13 +110,13 @@ import {
   function getUserAddress(email, password) {
     loginLink.textContent = 'Загрузка данных ...';
 
-    getUserInfo(email, password)
+    sessionCreate(email, password)
       .then(user => {
         userData = user;
         openNaviBook();
         hideForm(modalLoginWindow);
 
-        return getUserFavourites(user);
+        return naviGetFavorites(user);
       })
       .then(arr => {
         favoriteAddresses = arr;
@@ -126,7 +126,7 @@ import {
         for (let i = 0; i < actionButtons.length; i++) {
           actionButtons[i].classList.remove('action-buttons__button--disabled');
         }
-        return getUserCreated(userData);
+        return naviGetOwn(userData);
       })
       .then(arr => {
         myAddresses = arr;
@@ -147,9 +147,9 @@ import {
   createForm.addEventListener('submit', () => {
     getNewAddressInfo();
 
-    getUserInfo(loginInfo.email, loginInfo.password)
+    sessionCreate(loginInfo.email, loginInfo.password)
       .then(user =>
-        createAddress(
+        naviCreate(
           user,
           newAddressInfo.newLat,
           newAddressInfo.newLng,
@@ -243,9 +243,9 @@ import {
           return;
         });
         confirmDelete.addEventListener('click', () => {
-          getUserInfo(loginInfo.email, loginInfo.password).then(user => {
+          sessionCreate(loginInfo.email, loginInfo.password).then(user => {
             addressesToDelete.forEach(function(address) {
-              deleteAddress(user.token, address.container, address.naviaddress);
+              naviDelete(user.token, address.container, address.naviaddress);
               console.log('Удачно удален адрес: ' + address);
             });
             //очистить массив с удаляемыми адресами
