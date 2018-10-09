@@ -74,20 +74,6 @@ export function findUpcoming(arr, limit) {
 Поиск ближайших (по месторасположению) адресов 
 ----*/
 
-// Получить текущее расположение
-export function getLocation() {
-  return new Promise((resolve, reject) => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords);
-        resolve(position.coords);
-      });
-    } else {
-      alert('Геолокация не поддерживается вашим браузером');
-      reject();
-    }
-  });
-}
 // Создать квадрат для поиска вокруг адреса
 export function createRect(coords) {
   const delta = 0.02; //по моим рассчетам, это примерно 2км, т.е. адреса будут отбираться в зоне 2км

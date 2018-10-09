@@ -1,6 +1,7 @@
 import './sass/styles.scss';
 import {
   sessionCreate,
+  geolocationGet,
   naviCreate,
   naviDelete,
   naviGetOwn,
@@ -9,7 +10,6 @@ import {
 import {
   sortByDate,
   sortAbc,
-  getLocation,
   createRect,
   findNearest,
   findUpcoming,
@@ -115,6 +115,7 @@ import {
         userData = user;
         openNaviBook();
         hideForm(modalLoginWindow);
+        geolocationGet();
 
         return naviGetFavorites(user);
       })
@@ -197,7 +198,7 @@ import {
           break;
         case 'nearest':
           cleanSliders();
-          getLocation()
+          geolocationGet()
             .then(coords => createRect(coords))
             .then(rect => {
               showFavorites(findNearest(favoriteAddresses, rect));
