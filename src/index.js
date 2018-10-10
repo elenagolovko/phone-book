@@ -44,53 +44,11 @@ import {
   let userData;
   let favoriteAddresses, myAddresses;
 
-  function getLoginInfo() {
-    return handleModal('.modal-login', '.link-login', {
-      validateEmail,
-      validatePassword
-    });
-  }
+  // Common for all pages
 
-  function getNewAddressInfo() {
-    return handleModal('.modal__new-note', '.create__button', {
-      validatePos
-    });
-  }
+  AdaptiveMenu();
 
-  function exitNaviBook() {
-    loginLink.classList.remove('js-authorized');
-
-    for (let i = 0; i < actionButtons.length; i++) {
-      actionButtons[i].classList.add('action-buttons__button--disabled');
-    }
-
-    loginLink.textContent = 'Личный кабинет';
-    //скрыть внутреннее меню для Личного кабинета
-    const menuLinks = document.querySelectorAll('#js-navigation__list li');
-    for (let i = 0; i < menuLinks.length - 1; i++) {
-      menuLinks[i].classList.add('visually-hidden');
-    }
-    //Убрать со страницы список адресов
-    // clearListContainer();
-    cleanSliders();
-
-    //показать приветственный текст
-    const welcomeBlock = document.getElementById('js-welcomeBlock');
-    welcomeBlock.classList.remove('visually-hidden');
-  }
-
-  loginLink.addEventListener('click', () => {
-    if (loginLink.classList.contains('js-authorized')) {
-      exitNaviBook();
-    }
-  });
-
-  setModalListeners('.modal__search', '.search__button');
-  setModalListeners('.modal__sort', '.sort__button');
-  setModalListeners('.modal__delete', '.delete__button');
-
-  let loginInfo = getLoginInfo();
-  let newAddressInfo = getNewAddressInfo();
+  // "Sign-in" page
 
   function openNaviBook() {
     loginLink.textContent = 'Выход';
@@ -106,6 +64,15 @@ import {
       menuLinks[i].classList.remove('visually-hidden');
     }
   }
+
+  function getLoginInfo() {
+    return handleModal('.modal-login', '.link-login', {
+      validateEmail,
+      validatePassword
+    });
+  }
+
+  let loginInfo = getLoginInfo();
 
   function getUserAddress(email, password) {
     loginLink.textContent = 'Загрузка данных ...';
@@ -144,6 +111,48 @@ import {
     }
     getUserAddress(loginInfo.email, loginInfo.password);
   });
+
+  // "Записная книжка" page
+
+  function exitNaviBook() {
+    loginLink.classList.remove('js-authorized');
+
+    for (let i = 0; i < actionButtons.length; i++) {
+      actionButtons[i].classList.add('action-buttons__button--disabled');
+    }
+
+    loginLink.textContent = 'Личный кабинет';
+    //скрыть внутреннее меню для Личного кабинета
+    const menuLinks = document.querySelectorAll('#js-navigation__list li');
+    for (let i = 0; i < menuLinks.length - 1; i++) {
+      menuLinks[i].classList.add('visually-hidden');
+    }
+    //Убрать со страницы список адресов
+    // clearListContainer();
+    cleanSliders();
+
+    //показать приветственный текст
+    const welcomeBlock = document.getElementById('js-welcomeBlock');
+    welcomeBlock.classList.remove('visually-hidden');
+  }
+
+  loginLink.addEventListener('click', () => {
+    if (loginLink.classList.contains('js-authorized')) {
+      exitNaviBook();
+    }
+  });
+
+  function getNewAddressInfo() {
+    return handleModal('.modal__new-note', '.create__button', {
+      validatePos
+    });
+  }
+
+  setModalListeners('.modal__search', '.search__button');
+  setModalListeners('.modal__sort', '.sort__button');
+  setModalListeners('.modal__delete', '.delete__button');
+
+  let newAddressInfo = getNewAddressInfo();
 
   createForm.addEventListener('submit', () => {
     getNewAddressInfo();
@@ -263,13 +272,9 @@ import {
   searchInput.addEventListener('keydown', function(evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       evt.preventDefault();
-      // clearListContainer();
-      // loadLists(findName(addresses, searchInput.value));
       cleanSliders();
       showFavorites(findName(favoriteAddresses, searchInput.value));
       showMyAdresses(findName(myAddresses, searchInput.value));
     }
   });
-
-  AdaptiveMenu();
 })();
