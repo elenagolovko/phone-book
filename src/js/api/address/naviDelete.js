@@ -5,22 +5,26 @@ function naviDelete(token, container, naviaddress) {
   if (naviaddress[0].toString() === '#') {
     naviaddress = '%23'.concat(naviaddress.substring(1));
   }
-  console.log('deleting naviaddress', '[' + container + ']' + naviaddress);
-  fetch(apiURL + 'Addresses/' + container + '/' + naviaddress, {
-    method: 'delete',
-    headers: {
-      'content-type': 'application/json',
-      'auth-token': token
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      //TODO: доделать
-      console.log('deleteNaviaddress: ', data.message);
+
+  return new Promise(function(resolve) {
+    fetch(apiURL + 'Addresses/' + container + '/' + naviaddress, {
+      method: 'delete',
+      headers: {
+        'content-type': 'application/json',
+        'auth-token': token
+      }
     })
-    .catch(function(error) {
-      console.warn('Request failed', error);
-    });
+      .then(response => response.json())
+      .then(data => {
+        console.log(
+          'naviDelete: [' + container + ']' + naviaddress + ' ' + data.message
+        );
+        resolve(data);
+      })
+      .catch(function(error) {
+        console.warn('Request failed', error);
+      });
+  });
 }
 
 export default naviDelete;

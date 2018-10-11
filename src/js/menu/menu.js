@@ -9,7 +9,7 @@ const MenuBtn = () => {
   }
 };
 
-export default function AdaptiveMenu() {
+export default function adaptiveMenu() {
   const arr_menuLink = document.getElementsByClassName('navigation__link');
 
   for (let i = 0; i < arr_menuLink.length; i++) {
