@@ -56,7 +56,9 @@ export function handleModal(modalSelector, openSelector, validators) {
 
     let inputs = evt.target.querySelectorAll('.modal__input');
     let validity;
+
     inputs.forEach(function(element) {
+      // Проверить введенные данные в поле input
       switch (element.name) {
         case 'email':
           validity = validators.validateEmail(element.value, element);
@@ -93,12 +95,16 @@ export function handleModal(modalSelector, openSelector, validators) {
           }
           break;
       }
+
+      // Сохранить введенные данные в result в поле "имя данных"
       Object.defineProperty(result, element.name, {
         value: element.value,
         writable: true,
         enumerable: true,
         configurable: true
       });
+
+      // Обработчик ошибок на input, меняет CSS в случае ошибки(?)
       element.addEventListener('input', evt => {
         resetInputState(evt.target);
         const errLogin = document.getElementById('js-errLogin');
@@ -108,5 +114,6 @@ export function handleModal(modalSelector, openSelector, validators) {
       });
     });
   });
+
   return result;
 }
