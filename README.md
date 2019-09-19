@@ -6,8 +6,6 @@ A command project for NaviHack hackathon
 
 Наш проект является основой для удобного личного использования navi-адресов. Мы предлагаем записную книжку из navi-адресов с современными способами упорядочивания данных.
 
-Нашу работу можно посмотреть здесь: [navibook.space](https://navibook.space) (Основной функционал доступен.)
-
 ---
 
 Using: BEM, Webpack, Sass and Vanila JS.
